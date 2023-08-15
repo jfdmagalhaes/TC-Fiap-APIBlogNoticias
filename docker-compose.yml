@@ -1,0 +1,17 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Pass@word"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - sqlserver
+    volumes:
+      - ./scripts/schemas.sql:/tmp/scripts/schemas.sql
+      - ./scripts/init-schemas.sh:/tmp/scripts/init-schemas.sh
+    command: /bin/bash ./tmp/scripts/init-schemas.sh
