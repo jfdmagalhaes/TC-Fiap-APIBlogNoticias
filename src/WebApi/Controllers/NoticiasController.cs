@@ -1,3 +1,4 @@
+using Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,13 @@ namespace WebApi.Controllers;
 [Route("[controller]")]
 public class NoticiasController : ControllerBase
 {
+    private INoticiaRepository _repository;
+
+    public NoticiasController(INoticiaRepository repository)
+    {
+        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+    }
+
     [HttpGet("GetAll")]
     public IEnumerable<WeatherForecast> GetAllAsync()
     {

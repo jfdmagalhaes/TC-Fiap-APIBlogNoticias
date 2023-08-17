@@ -14,10 +14,8 @@ public static class DependencyInjection
 
         services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRepository>();
 
-        services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));            
-        });
+        services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
+        services.AddDbContext<NoticiaDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
 
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()

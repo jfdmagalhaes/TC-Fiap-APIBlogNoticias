@@ -1,6 +1,8 @@
-﻿namespace Domain.Entities;
+﻿using Domain.Interfaces;
 
-public class Noticia
+namespace Domain.Entities;
+
+public class Noticia : IAggregateRoot
 {
     public int Id { get; set; }
     public string Titulo { get; set; }
