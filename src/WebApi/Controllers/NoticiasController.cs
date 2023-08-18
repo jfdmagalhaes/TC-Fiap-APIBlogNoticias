@@ -16,6 +16,7 @@ public class NoticiasController : ControllerBase
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
+    [Authorize]
     [HttpGet("GetAll")]
     public async Task<IEnumerable<Noticia>> GetAllAsync()
     {
@@ -35,6 +36,7 @@ public class NoticiasController : ControllerBase
         return noticia;
     }
 
+    [Authorize]
     [HttpPost("AddNoticia")]
     public async Task<IActionResult> AddNoticiaAsync(Noticia noticia)
     {
