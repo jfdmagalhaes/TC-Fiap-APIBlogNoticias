@@ -7,7 +7,7 @@ public class NoticiaConfiguration : IEntityTypeConfiguration<Noticia>
 {
     public void Configure(EntityTypeBuilder<Noticia> builder)
     {
-        builder.ToTable("Noticia");
+        builder.ToTable("Noticias");
 
         builder.Property(p => p.Id)
             .HasColumnName("Id")

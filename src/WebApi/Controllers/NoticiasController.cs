@@ -30,10 +30,7 @@ public class NoticiasController : ControllerBase
     [HttpGet("GetById")]
     public async Task<Noticia> GetByIdAsync(int noticiaId)
     {
-        var noticia = await _repository.GetNoticiaById(noticiaId);
-        if (noticia == null) throw new ArgumentNullException($"Não foi encontrada nenhuma noticia com o id {noticiaId}");
-
-        return noticia;
+        return await _repository.GetNoticiaById(noticiaId);
     }
 
     [Authorize]
@@ -41,6 +38,8 @@ public class NoticiasController : ControllerBase
     public async Task<IActionResult> AddNoticiaAsync(Noticia noticia)
     {
         await _repository.AddNoticia(noticia);
+        await _repository.UnitOfWork.CommitAsync();
+
         return Ok();
     }
 }

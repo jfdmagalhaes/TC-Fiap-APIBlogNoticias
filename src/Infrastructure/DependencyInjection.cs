@@ -1,4 +1,5 @@
-﻿using Infrastructure.EntityFramework.Context;
+﻿using Domain.Repositories;
+using Infrastructure.EntityFramework.Context;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,11 @@ public static class DependencyInjection
     {
         if (services is null) throw new ArgumentNullException(nameof(services));
 
-        services.AddScoped<IUserAuthenticationRepository, UserAuthenticationRepository>();
+        services.AddTransient<IUserAuthenticationRepository, UserAuthenticationRepository>();
+        services.AddTransient<INoticiaRepository, NoticiaRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
-        services.AddDbContext<NoticiaDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
+        services.AddDbContext<INoticiaDbContext,NoticiaDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
 
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
