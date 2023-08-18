@@ -1,3 +1,4 @@
+using Domain.Entities;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,25 +17,28 @@ public class NoticiasController : ControllerBase
     }
 
     [HttpGet("GetAll")]
-    public IEnumerable<WeatherForecast> GetAllAsync()
+    public async Task<IEnumerable<Noticia>> GetAllAsync()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-        })
-        .ToArray();
+        var noticias = await _repository.GetAllNoticias();
+        if (noticias == null) throw new ArgumentNullException("Não foi encontrada nenhuma noticia");
+
+        return await _repository.GetAllNoticias();
     }
 
     [Authorize]
     [HttpGet("GetById")]
-    public IEnumerable<WeatherForecast> GetByIdAsync()
+    public async Task<Noticia> GetByIdAsync(int noticiaId)
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-        })
-        .ToArray();
+        var noticia = await _repository.GetNoticiaById(noticiaId);
+        if (noticia == null) throw new ArgumentNullException($"Não foi encontrada nenhuma noticia com o id {noticiaId}");
+
+        return noticia;
+    }
+
+    [HttpPost("AddNoticia")]
+    public async Task<IActionResult> AddNoticiaAsync(Noticia noticia)
+    {
+        await _repository.AddNoticia(noticia);
+        return Ok();
     }
 }

@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Domain.Repositories;
 using Infrastructure.EntityFramework.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 public class NoticiaRepository : INoticiaRepository
@@ -14,9 +15,19 @@ public class NoticiaRepository : INoticiaRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task AdicionaNoticia(Noticia noticia)
+    public async Task AddNoticia(Noticia noticia)
     {
         await _context.Noticias.AddAsync(noticia);
+    }
+
+    public async Task<IEnumerable<Noticia>> GetAllNoticias()
+    {
+        return await _context.Noticias.ToListAsync();
+    }
+
+    public async Task<Noticia> GetNoticiaById(int noticiaId)
+    {
+        return await _context.Noticias.Where(x => x.Id == noticiaId).FirstOrDefaultAsync();
     }
 
     private bool disposedValue = false;
@@ -32,8 +43,6 @@ public class NoticiaRepository : INoticiaRepository
     public void Dispose()
     {
         Dispose(true);
-
         GC.SuppressFinalize(this);
-
     }
 }
