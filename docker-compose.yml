@@ -1,3 +1,21 @@
+# services:
+#   sqlserver:
+#     image: mcr.microsoft.com/mssql/server:2019-latest
+#     environment:
+#       SA_PASSWORD: "Pass@word"
+#       ACCEPT_EULA: "Y"
+#       MSSQL_PID: "Developer"
+#     ports:
+#       - "1433:1433"
+#   mssqltools:
+#     image: mcr.microsoft.com/mssql-tools
+#     depends_on:
+#       - sqlserver
+#     volumes:
+#       - ./resources/scripts/schemas.sql:/tmp/resources/scripts/schemas.sql
+#       - ./resources/scripts/init-schemas.sh:/tmp/resources/scripts/init-schemas.sh
+#     command: /bin/bash ./tmp/resources/scripts/init-schemas.sh
+version: '3.9'
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -15,3 +33,13 @@ services:
       - ./resources/scripts/schemas.sql:/tmp/resources/scripts/schemas.sql
       - ./resources/scripts/init-schemas.sh:/tmp/resources/scripts/init-schemas.sh
     command: /bin/bash ./tmp/resources/scripts/init-schemas.sh
+  api:
+    build:
+      context: .
+      dockerfile: ./resources/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - sqlserver
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True;"

@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.EntityFramework.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -74,5 +73,13 @@ public static class ServiceExtension
                 }
             });
         });
+    }
+
+    public static void MigrationInitialization(IApplicationBuilder app)
+    {
+        using (var serviceScope = app.ApplicationServices.CreateScope())
+        {
+            serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+        }
     }
 }

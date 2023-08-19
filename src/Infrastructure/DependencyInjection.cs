@@ -17,7 +17,7 @@ public static class DependencyInjection
         services.AddTransient<INoticiaRepository, NoticiaRepository>();
 
         services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
-        services.AddDbContext<INoticiaDbContext,NoticiaDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
+        services.AddDbContext<INoticiaDbContext, NoticiaDbContext>(options => { options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")); });
 
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
