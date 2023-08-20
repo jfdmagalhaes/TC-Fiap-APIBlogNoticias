@@ -1,6 +1,9 @@
 ﻿using Infraestructure;
 using Infrastructure.EntityFramework.Context;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -26,6 +29,15 @@ public class Startup
         services.ConfigureJWT(Configuration);
         services.ConfigureSwagger();
 
+        services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"C:\temp-keys\"))
+                .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration()
+                {
+                    EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+                    ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+                });
+
+        services.AddRazorPages();
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,14 +53,13 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        app.UseAuthorization();
         app.UseRouting();
-
+        app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
         });
 
-        //ServiceExtension.MigrationInitialization(app);
+        ServiceExtension.MigrationInitialization(app);
     }
 }

@@ -38,8 +38,7 @@ services:
       context: .
       dockerfile: ./resources/Dockerfile
     ports:
-      - "80:80"
+      - "8999:80"
+      - "8988:8988"
     depends_on:
       - sqlserver
-    environment:
-      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True;"

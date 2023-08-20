@@ -79,7 +79,47 @@ public static class ServiceExtension
     {
         using (var serviceScope = app.ApplicationServices.CreateScope())
         {
-            serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+
+            var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            // Defina um limite de tempo para a espera pelo banco de dados (em segundos).
+            var maxAttempts = 10;
+            var currentAttempt = 0;
+
+            while (currentAttempt < maxAttempts)
+            {
+                try
+                {
+                    // Tente acessar o banco de dados fazendo uma consulta simples.
+                    var canConnect = dbContext.Database.CanConnect();
+
+                    if (canConnect)
+                    {
+                        // O banco de dados está disponível; execute migrações.
+                        dbContext.Database.Migrate();
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Trate exceções, se necessário.
+                    Console.WriteLine($"Tentativa {currentAttempt + 1}: {ex.Message}");
+                }
+
+                // Aguarde um curto período de tempo antes de tentar novamente.
+                var delayInSeconds = 5;
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(delayInSeconds));
+
+                currentAttempt++;
+            }
+
+            if (currentAttempt == maxAttempts)
+            {
+                Console.WriteLine("O banco de dados não está disponível após várias tentativas.");
+                // Lidar com o erro ou registrar, se necessário.
+            }
+
+            //serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
         }
     }
 }

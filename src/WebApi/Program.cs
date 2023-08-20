@@ -18,6 +18,8 @@ namespace WebApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseUrls("http://0.0.0.0:8999", "https://0.0.0.0:8998");
+
                 });
     }
 }
