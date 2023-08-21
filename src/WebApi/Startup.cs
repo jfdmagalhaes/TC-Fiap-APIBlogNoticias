@@ -29,12 +29,12 @@ public class Startup
         services.ConfigureJWT(Configuration);
         services.ConfigureSwagger();
 
-        services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"C:\temp-keys\"))
-                .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration()
-                {
-                    EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
-                    ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
-                });
+        //services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"C:\temp-keys\"))
+        //        .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration()
+        //        {
+        //            EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+        //            ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+        //        });
 
         services.AddRazorPages();
 
@@ -54,10 +54,14 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseRouting();
+
+        app.UseAuthentication();
         app.UseAuthorization();
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapRazorPages();
         });
 
         ServiceExtension.MigrationInitialization(app);

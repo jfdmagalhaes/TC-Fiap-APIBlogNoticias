@@ -20,14 +20,16 @@ public static class ServiceExtension
         })
         .AddJwtBearer(options =>
         {
+            options.RequireHttpsMetadata = false;
+            options.SaveToken = true;
+
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtConfig["validIssuer"],
-                ValidAudience = jwtConfig["validAudience"],
+                //ValidIssuer = jwtConfig["validIssuer"],
+                //ValidAudience = jwtConfig["validAudience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
             };
         });
