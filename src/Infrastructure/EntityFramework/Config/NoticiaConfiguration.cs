@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.EntityFramework.Config;
-public class NoticiaConfiguration : IEntityTypeConfiguration<Noticia>
+public class NoticiaConfiguration : IEntityTypeConfiguration<NoticiaDto>
 {
-    public void Configure(EntityTypeBuilder<Noticia> builder)
+    public void Configure(EntityTypeBuilder<NoticiaDto> builder)
     {
         builder.ToTable("Noticias");
 

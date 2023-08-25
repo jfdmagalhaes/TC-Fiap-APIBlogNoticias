@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{60BFB269-7005-4A79-8A2A-96BEBC4E2315}"
 	ProjectSection(SolutionItems) = preProject
 		resources\docker-compose.yml = resources\docker-compose.yml
+		resources\Dockerfile = resources\Dockerfile
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "src\WebApi\WebApi.csproj", "{FBEE2B98-1417-41D7-B549-BDA62EB39846}"

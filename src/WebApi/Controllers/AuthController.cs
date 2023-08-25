@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace WebApi.Controllers;
 
@@ -15,7 +14,7 @@ public class AuthController : ControllerBase
     private readonly IUserAuthenticationRepository _repository;
 
     public AuthController(
-        UserManager<IdentityUser> userManager, 
+        UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
         IUserAuthenticationRepository repository)
     {
@@ -32,7 +31,7 @@ public class AuthController : ControllerBase
 
         if (result.Succeeded)
         {
-            return Ok(new { Token  = await _repository.CreateTokenAsync(user) });
+            return Ok(new { Token = await _repository.CreateTokenAsync(user) });
         }
         else
         {

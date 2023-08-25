@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Models;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,19 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class NoticiasController : ControllerBase
 {
     private INoticiaRepository _repository;
 
-    public NoticiasController(INoticiaRepository repository)
+
+    public NoticiasController(
+        INoticiaRepository repository)
     {
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
     [Authorize]
     [HttpGet("GetAll")]
-    public async Task<IEnumerable<Noticia>> GetAllAsync()
+    public async Task<IEnumerable<NoticiaDto>> GetAllAsync()
     {
         var noticias = await _repository.GetAllNoticias();
         if (noticias == null) throw new ArgumentNullException("Não foi encontrada nenhuma noticia");
@@ -28,7 +31,7 @@ public class NoticiasController : ControllerBase
 
     [Authorize]
     [HttpGet("GetById")]
-    public async Task<Noticia> GetByIdAsync(int noticiaId)
+    public async Task<NoticiaDto> GetByIdAsync(int noticiaId)
     {
         return await _repository.GetNoticiaById(noticiaId);
     }
@@ -37,9 +40,24 @@ public class NoticiasController : ControllerBase
     [HttpPost("AddNoticia")]
     public async Task<IActionResult> AddNoticiaAsync(Noticia noticia)
     {
-        await _repository.AddNoticia(noticia);
-        await _repository.UnitOfWork.CommitAsync();
+        try
+        {
+            var noticiaDto = new NoticiaDto
+            {
+                Autor = noticia.Autor,
+                DataPublicacao = noticia.DataPublicacao,
+                Descricao = noticia.Descricao,
+                Titulo = noticia.Titulo
+            };
 
-        return Ok();
+            await _repository.AddNoticia(noticiaDto);
+            await _repository.UnitOfWork.CommitAsync();
+
+            return Ok();
+        }
+        catch (Exception) 
+        {
+            throw; 
+        }
     }
 }

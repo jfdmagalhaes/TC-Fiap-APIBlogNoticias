@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.EntityFramework.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -21,14 +20,16 @@ public static class ServiceExtension
         })
         .AddJwtBearer(options =>
         {
+            options.RequireHttpsMetadata = false;
+            options.SaveToken = true;
+
             options.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtConfig["validIssuer"],
-                ValidAudience = jwtConfig["validAudience"],
+                //ValidIssuer = jwtConfig["validIssuer"],
+                //ValidAudience = jwtConfig["validAudience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
             };
         });
@@ -74,5 +75,53 @@ public static class ServiceExtension
                 }
             });
         });
+    }
+
+    public static void MigrationInitialization(IApplicationBuilder app)
+    {
+        using (var serviceScope = app.ApplicationServices.CreateScope())
+        {
+
+            var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+            // Defina um limite de tempo para a espera pelo banco de dados (em segundos).
+            var maxAttempts = 10;
+            var currentAttempt = 0;
+
+            while (currentAttempt < maxAttempts)
+            {
+                try
+                {
+                    // Tente acessar o banco de dados fazendo uma consulta simples.
+                    var canConnect = dbContext.Database.CanConnect();
+
+                    if (canConnect)
+                    {
+                        // O banco de dados está disponível; execute migrações.
+                        dbContext.Database.Migrate();
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Trate exceções, se necessário.
+                    Console.WriteLine($"Tentativa {currentAttempt + 1}: {ex.Message}");
+                }
+
+                // Aguarde um curto período de tempo antes de tentar novamente.
+                var delayInSeconds = 5;
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(delayInSeconds));
+
+                currentAttempt++;
+            }
+
+            if (currentAttempt == maxAttempts)
+            {
+                Console.WriteLine("O banco de dados não está disponível após várias tentativas.");
+                // Lidar com o erro ou registrar, se necessário.
+            }
+
+            //serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+        }
     }
 }
