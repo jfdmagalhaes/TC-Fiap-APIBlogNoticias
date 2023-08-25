@@ -7,5 +7,5 @@ namespace Infrastructure.EntityFramework.Context;
 public interface INoticiaDbContext : IUnitOfWork
 {
     IDbConnection Connection { get; }
-    DbSet<Noticia> Noticias { get; }
+    DbSet<NoticiaDto> Noticias { get; }
 }

@@ -2,9 +2,9 @@
 using Domain.Interfaces;
 
 namespace Domain.Repositories;
-public interface INoticiaRepository : IRepository<Noticia>
+public interface INoticiaRepository : IRepository<NoticiaDto>
 {
-    Task AddNoticia(Noticia noticia);
-    Task<IEnumerable<Noticia>> GetAllNoticias();
-    Task<Noticia> GetNoticiaById(int noticiaId);
+    Task AddNoticia(NoticiaDto noticia);
+    Task<IEnumerable<NoticiaDto>> GetAllNoticias();
+    Task<NoticiaDto> GetNoticiaById(int noticiaId);
 }

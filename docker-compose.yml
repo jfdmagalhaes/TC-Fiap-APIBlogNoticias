@@ -38,6 +38,6 @@ services:
       context: .
       dockerfile: ./resources/Dockerfile
     ports:
-      - "8080:80"
+      - "8181:80"
     depends_on:
       - sqlserver

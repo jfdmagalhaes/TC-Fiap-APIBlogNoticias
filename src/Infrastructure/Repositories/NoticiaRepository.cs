@@ -15,17 +15,17 @@ public class NoticiaRepository : INoticiaRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task AddNoticia(Noticia noticia)
+    public async Task AddNoticia(NoticiaDto noticia)
     {
         await _context.Noticias.AddAsync(noticia);
     }
 
-    public async Task<IEnumerable<Noticia>> GetAllNoticias()
+    public async Task<IEnumerable<NoticiaDto>> GetAllNoticias()
     {
         return await _context.Noticias.ToListAsync();
     }
 
-    public async Task<Noticia> GetNoticiaById(int noticiaId)
+    public async Task<NoticiaDto> GetNoticiaById(int noticiaId)
     {
         return await _context.Noticias.Where(x => x.Id == noticiaId).FirstOrDefaultAsync();
     }

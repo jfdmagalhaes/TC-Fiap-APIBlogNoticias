@@ -11,7 +11,7 @@ public class NoticiaDbContext : DbContext, INoticiaDbContext
     private readonly IDbContextTransaction _currentTransaction;
     public IDbContextTransaction GetCurrentTransaction() => _currentTransaction;
 
-    public DbSet<Noticia> Noticias { get; set; }
+    public DbSet<NoticiaDto> Noticias { get; set; }
 
     public NoticiaDbContext()
     {
