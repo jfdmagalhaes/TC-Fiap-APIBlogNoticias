@@ -30,10 +30,10 @@ public class NoticiasController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet("GetById")]
-    public async Task<NoticiaDto> GetByIdAsync(int noticiaId)
+    [HttpGet("{id}")]
+    public async Task<NoticiaDto> GetByIdAsync(int id)
     {
-        return await _repository.GetNoticiaById(noticiaId);
+        return await _repository.GetNoticiaById(id);
     }
 
     [Authorize]
@@ -55,9 +55,9 @@ public class NoticiasController : ControllerBase
 
             return Ok();
         }
-        catch (Exception) 
+        catch (Exception)
         {
-            throw; 
+            throw;
         }
     }
 }
