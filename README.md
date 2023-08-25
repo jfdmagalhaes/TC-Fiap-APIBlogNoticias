@@ -10,8 +10,51 @@ Para testar localmente, executar o docker-compose disponível no repositório. C
 
 
 ```dotnet
-docker-compose up -d
+docker-compose up --build -d
 ```
+Realizar o acesso através do Postman ou outra ferramenta semelhante.
+Para usar a API, configure as seguintes variáveis no Postman:
+
+- Authorization Type: Bearer Token
+- Adicionar o token de autenticação obtido através do endpoint de login.
+
+
+## Rotas
+(Todas utilizam JSON)
+
+### 1. Criar uma nova noticia
+
+- **URL:** `http://localhost:8181/api/noticias/addnoticia`
+- **Método HTTP:** POST
+- **Descrição:** Cria uma nova noticia.
+
+### 2. Obtem todas as noticias cadastradas
+
+- **URL:** `http://localhost:8181/api/noticias/getall`
+- **Método HTTP:** GET
+- **Descrição:** Retorna informações sobre um recurso específico.
+
+### 3. Obtem uma noticias cadastrada atráves de um Id
+
+- **URL:** `http://localhost:8181/api/noticias/getById/{id}`
+- **Método HTTP:** GET
+- **Descrição:** Busca noticia específica com o ID.
+
+### 4. Cria um novo usuário
+
+- **URL:** `http://localhost:8181/api/auth/createuser`
+- **Método HTTP:** POST
+- **Descrição:** Cria um novo usuário.
+
+### 4. Realiza o login de usuário para obter Token
+
+- **URL:** `http://localhost:3000/api/auth/login`
+- **Método HTTP:** POST
+- **Descrição:** Autentica usuário e fornece token.
+
+
+(Necessário realizar primeiro a criação do usuário e após isso o login. Com o login, utilizar o token retornado, para configurar a autenticação e acessar os endpoints de manipulação de notícias.)
+
 
 ## Contributing
 
