@@ -24,19 +24,19 @@ Para usar a API, configure as seguintes variáveis no Postman:
 
 ### 1. Criar uma nova noticia
 
-- **URL:** `http://localhost:8181/api/noticias/addnoticia`
+- **URL:** `http://localhost:8181/api/Noticias/addnoticia`
 - **Método HTTP:** POST
 - **Descrição:** Cria uma nova noticia.
 
 ### 2. Obtem todas as noticias cadastradas
 
-- **URL:** `http://localhost:8181/api/noticias/getall`
+- **URL:** `http://localhost:8181/api/Noticias/getall`
 - **Método HTTP:** GET
 - **Descrição:** Retorna informações sobre um recurso específico.
 
 ### 3. Obtem uma noticias cadastrada atráves de um Id
 
-- **URL:** `http://localhost:8181/api/noticias/getById/{id}`
+- **URL:** `http://localhost:8181/api/Noticias/{id}`
 - **Método HTTP:** GET
 - **Descrição:** Busca noticia específica com o ID.
 
