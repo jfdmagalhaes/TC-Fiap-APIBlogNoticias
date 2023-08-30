@@ -54,13 +54,3 @@ Para usar a API, configure as seguintes variáveis no Postman:
 
 
 (Necessário realizar primeiro a criação do usuário e após isso o login. Com o login, utilizar o token retornado, para configurar a autenticação e acessar os endpoints de manipulação de notícias.)
-
-
-## Contributing
-
-
-
-
-
-
-## License
