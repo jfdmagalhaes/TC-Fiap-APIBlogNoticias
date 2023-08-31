@@ -4,16 +4,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 8999
 
-# Use a imagem base do SDK do .NET Core para compilação
-#FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-#WORKDIR /src
-#COPY ["src/WebApi/WebApi.csproj", "WebApi/"]
-#RUN dotnet restore "WebApi/WebApi.csproj"
-#COPY . .
-#WORKDIR "/src/WebApi"
-#RUN dotnet build "WebApi.csproj" -c Release -o /app/build
-
-
+# Use a imagem base do SDK do .NET Core para compilaï¿½ï¿½o
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/WebApi/WebApi.csproj", "WebApi/"]
@@ -31,7 +22,7 @@ FROM build AS publish
 WORKDIR "/src/src/WebApi"
 RUN dotnet publish "WebApi.csproj" -c Release -o /app/publish
 
-# Etapa final - criação da imagem da aplicação
+# Etapa final - criaï¿½ï¿½o da imagem da aplicaï¿½ï¿½o
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
