@@ -51,7 +51,7 @@ Para usar a API, configure as seguintes variáveis no Postman:
 
 ### 5. Realiza o login de usuário para obter Token
 
-- **URL:** `http://localhost:3000/api/auth/login`
+- **URL:** `http://localhost:8181/api/auth/login`
 - **Método HTTP:** POST
 - **Descrição:** Autentica usuário e fornece token.
 
