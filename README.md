@@ -37,7 +37,7 @@ Para usar a API, configure as seguintes variáveis no Postman:
 - **Método HTTP:** GET
 - **Descrição:** Retorna informações sobre um recurso específico.
 
-### 3. Obtem uma noticias cadastrada atráves de um Id
+### 3. Obtem uma noticia cadastrada atráves de um Id
 
 - **URL:** `http://localhost:8181/api/Noticias/{id}`
 - **Método HTTP:** GET
@@ -49,7 +49,7 @@ Para usar a API, configure as seguintes variáveis no Postman:
 - **Método HTTP:** POST
 - **Descrição:** Cria um novo usuário.
 
-### 4. Realiza o login de usuário para obter Token
+### 5. Realiza o login de usuário para obter Token
 
 - **URL:** `http://localhost:3000/api/auth/login`
 - **Método HTTP:** POST
