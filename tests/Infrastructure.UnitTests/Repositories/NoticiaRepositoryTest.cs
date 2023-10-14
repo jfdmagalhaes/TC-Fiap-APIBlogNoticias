@@ -31,8 +31,8 @@ public class NoticiaRepositoryTest
             new NoticiaDto { Id = 2, Titulo = "Noticia 2" }
         };
 
-        _context.Setup(x => x.Noticias.ToListAsync())
-            .ReturnsAsync(noticias);
+        //_context.Setup(x => x.Noticias.ToListAsync())
+        //    .ReturnsAsync(noticias);
 
         // Act
         var result = await _repository.GetAllNoticias();
