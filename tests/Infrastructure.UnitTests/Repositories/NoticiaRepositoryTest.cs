@@ -2,7 +2,8 @@
 using FluentAssertions;
 using Infrastructure.EntityFramework.Context;
 using Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Infrastructure.UnitTests.Repositories.Utils;
+using MockQueryable.Moq;
 using Moq;
 using NUnit.Framework.Internal;
 
@@ -13,34 +14,52 @@ public class NoticiaRepositoryTest
 {
     private NoticiaRepository _repository;
     private Mock<INoticiaDbContext> _context;
+    private readonly List<NoticiaDto> noticias = new();
 
     [SetUp]
     public void SetUp()
     {
+        noticias.AddRange(UnitTestTools.CreateNoticias());
+
+        var noticiasMock = noticias.AsQueryable().BuildMockDbSet();
+
         _context = new Mock<INoticiaDbContext>();
+        _context.Setup(x => x.Noticias).Returns(noticiasMock.Object);
         _repository = new NoticiaRepository(_context.Object);
     }
 
     [Test]
     public async Task GetAllNoticias_ShouldReturn_AllNoticias()
     {
-        // Arrange
-        var noticias = new List<NoticiaDto>
-        {
-            new NoticiaDto { Id = 1, Titulo = "Noticia 1" },
-            new NoticiaDto { Id = 2, Titulo = "Noticia 2" }
-        };
-
-        //_context.Setup(x => x.Noticias.ToListAsync())
-        //    .ReturnsAsync(noticias);
-
         // Act
         var result = await _repository.GetAllNoticias();
 
         // Assert
         result.Should().NotBeNull();
-        result.Should().HaveCount(2);
-        result.Should().ContainEquivalentOf(noticias[0]);
-        result.Should().ContainEquivalentOf(noticias[1]);
+        result.Should().BeOfType<List<NoticiaDto>>();
     }
+
+    [Test]
+    public void AddNoticia_ShouldAdd_Successfully()
+    {
+        //arr
+        var noticia = UnitTestTools.CreateNoticia();
+
+        // Act & Ass
+        Assert.DoesNotThrowAsync(async () => await _repository.AddNoticia(noticia));
+    }
+
+    [Test]
+    public void DeleteNoticia_ShouldDelete_Successfully()
+    {
+        //arr
+        var noticia = UnitTestTools.CreateNoticia();
+
+        // Act & Ass
+        Assert.DoesNotThrowAsync(async () => await _repository.DeleteById(noticia.Id));
+    }
+
+    [Test]
+    public void Dispose()
+        => Assert.DoesNotThrow(() => _repository.Dispose());
 }

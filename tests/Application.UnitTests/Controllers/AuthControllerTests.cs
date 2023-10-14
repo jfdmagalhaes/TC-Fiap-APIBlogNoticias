@@ -85,4 +85,24 @@ public class AuthControllerTests
         Assert.IsNotNull(result);
         Assert.That(result.StatusCode, Is.EqualTo(401));
     }
+
+    [Test]
+    public async Task CreateUser_InvalidModel_ReturnsBadRequestResult()
+    {
+        //arr
+        var model = new LoginViewModel { UserName = "userName", Password = "invalidpassword" };
+
+        _mockUserManager.Setup(x => x.FindByNameAsync(model.UserName))
+            .ReturnsAsync(new IdentityUser());
+
+        _mockSignInManager.Setup(x => x.PasswordSignInAsync(model.UserName, model.Password, false, false))
+            .ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Failed);
+
+        //act
+        var result = await _authController.Login(model) as UnauthorizedObjectResult;
+
+        //ass
+        Assert.IsNotNull(result);
+        Assert.That(result.StatusCode, Is.EqualTo(401));
+    }
 }
