@@ -1,4 +1,5 @@
-﻿using Infrastructure.EntityFramework.Context;
+﻿using Domain.Entities;
+using Infrastructure.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -7,7 +8,7 @@ public class DatabaseSetup : IDisposable
 {
     private static readonly object _lock = new object();
     private static bool _databaseInitialized;
-    private string dbName = "TestDatabase.db";
+    private string dbName = "db_noticiastest";
 
     public static NoticiaDbContext CreateContext()
     {
@@ -28,6 +29,28 @@ public class DatabaseSetup : IDisposable
 
         return new NoticiaDbContext(optionBuilder.Options);
     }
+
+    public static void Seed()
+    {
+        using (var context = CreateContext())
+        {
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+
+            DatabaseSetup.SeedData(context);
+        }
+    }
+
+    public static void SeedData(NoticiaDbContext context)
+    {
+        var dbSet = context.Set<NoticiaDto>();
+        var noticia = new NoticiaDto { Autor = "Autor", Descricao = "Descricao" };
+
+        dbSet.AddRange(new List<NoticiaDto>() { noticia });
+
+        context.SaveChanges();
+    }
+
     public void Dispose()
     {
         throw new NotImplementedException();
