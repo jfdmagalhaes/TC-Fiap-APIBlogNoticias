@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ "*" ]
 
+env:
+  applicationUnitTests: '$(System.DefaultWorkingDirectory)/Application.UnitTests/Application.UnitTests.csproj'
+  infrastructureUnitTests: '$(System.DefaultWorkingDirectory)/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj'
+  integrationTests: '$(System.DefaultWorkingDirectory)/Infrastructure.IntegrationTests/Infrastructure.IntegrationTests.csproj'
+  
 jobs:
   build:
 
@@ -26,7 +31,7 @@ jobs:
       run: dotnet build --no-restore
       
     - name: Unit Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test $(applicationUnitTests) --verbosity normal
       
     - name: Integration Test
       run: |
