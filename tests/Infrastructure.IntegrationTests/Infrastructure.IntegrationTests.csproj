@@ -7,6 +7,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,10 +17,8 @@
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.12" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
     <PackageReference Include="Moq" Version="4.20.69" />
-    <PackageReference Include="NUnit" Version="3.13.3" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.4.2" />
-    <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.5.3" />
   </ItemGroup>
 
   <ItemGroup>

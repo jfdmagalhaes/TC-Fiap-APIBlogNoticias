@@ -5,42 +5,45 @@ using Domain.Repositories;
 using FluentAssertions;
 using Infrastructure.EntityFramework.Context;
 using Infrastructure.Repositories;
-using NUnit.Framework;
+using Xunit;
 
 namespace Infrastructure.IntegrationTests.Repositories;
 
-[TestFixture]
-public class NoticiaRepositoryTests
+public class NoticiaRepositoryTests : IClassFixture<DatabaseSetup>, IDisposable
 {
-    private INoticiaDbContext _context = DatabaseSetup.CreateContext();
+    private NoticiaDbContext _context;
     private INoticiaRepository _repository;
     private IUnitOfWork _unitOfWork => _context;
 
-    public NoticiaRepositoryTests()
+    public NoticiaRepositoryTests(DatabaseSetup fixture)
     {
-        DatabaseSetup.Seed();        
-    }
-
-    [SetUp]
-    public void Setup()
-    {
+        _context = fixture.DbContext;
+        _context.Connection.BeginTransaction();
         _repository = new NoticiaRepository(_context);
     }
 
-    [TearDown]
-    public void Clenup()
-    {
-        _unitOfWork.CommitAsync();
-        _context.Connection.Dispose();
-    }
-
-    [Test]
+    [Fact]
     public async Task GetAllAsync_ShouldBe_GetNoticias()
     {
+        // Arrange
+        var noticias = new List<NoticiaDto>
+        {
+            new NoticiaDto { Id = 1, Titulo = "Noticia 1" },
+            new NoticiaDto { Id = 2, Titulo = "Noticia 2" }
+        };
+
+        _context.Add(noticias);
+        _context.SaveChanges();
+
         var result = await _repository.GetAllNoticias();
 
         //// Assert
         result.Should().NotBeNull();
         result.Should().BeOfType<List<NoticiaDto>>();
+    }
+
+    public void Dispose()
+    {
+        _context.Database.RollbackTransaction();
     }
 }

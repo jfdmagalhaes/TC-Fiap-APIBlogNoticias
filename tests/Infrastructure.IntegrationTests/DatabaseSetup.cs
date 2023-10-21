@@ -2,68 +2,49 @@
 using Infrastructure.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Application.IntegrationTests;
 public class DatabaseSetup : IDisposable
 {
-    private static readonly object _lock = new object();
-    private static bool _databaseInitialized;
-    private string dbName = "db_noticiastest";
+    public NoticiaDbContext DbContext { get; private set; }
 
-    public static NoticiaDbContext CreateContext()
+    public DatabaseSetup()
     {
-        var config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.Development.json")
-            .AddEnvironmentVariables()
-            .Build();
+        DbContext = CreateDbContext();
+    }
 
-        var databaseSettings = config.GetConnectionString("DefaultConnectionTest");
+    public void Dispose()
+    {
+        DbContext.Dispose();
+        DbContext.Database.RollbackTransaction();
+    }
+
+    private NoticiaDbContext CreateDbContext()
+    {
+        var host = Host.CreateDefaultBuilder().Build();
+        var config = host.Services.GetRequiredService<IConfiguration>();
+
+        //var options = new DbContextOptionsBuilder<NoticiaDbContext>()
+        //    .UseSqlServer(config.GetConnectionString("DefaultConnectionTest"))
+        //    .Options;
+
 
         var optionBuilder = new DbContextOptionsBuilder<NoticiaDbContext>();
         optionBuilder.UseSqlServer(
-            databaseSettings,
+            config.GetConnectionString("DefaultConnectionTest"),
             optionsAction =>
             {
                 optionsAction.EnableRetryOnFailure(10, TimeSpan.FromSeconds(10), null);
             });
 
-        return new NoticiaDbContext(optionBuilder.Options);
-    }
 
-    public static void Seed()
-    {
-        using (var context = CreateContext())
-        {
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+        var context = new NoticiaDbContext(optionBuilder.Options);
 
-            DatabaseSetup.SeedData(context);
-        }
-    }
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
 
-    public static void SeedData(NoticiaDbContext context)
-    {
-        var dbSet = context.Set<NoticiaDto>();
-        var noticia = new NoticiaDto { Autor = "Autor", Descricao = "Descricao" };
-
-        dbSet.AddRange(new List<NoticiaDto>() { noticia });
-
-        context.SaveChanges();
-    }
-
-    private bool disposedValue = false;
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!disposedValue)
-        {
-            disposedValue = true;
-        }
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
+        return context;
     }
 }
