@@ -30,6 +30,12 @@ public class NoticiaRepository : INoticiaRepository
         return await _context.Noticias.Where(x => x.Id == noticiaId).FirstOrDefaultAsync();
     }
 
+    public async Task DeleteById(int noticiaId)
+    {
+        var noticia = await GetNoticiaById(noticiaId);
+        _context.Noticias.Remove(noticia);
+    }
+
     private bool disposedValue = false;
 
     protected virtual void Dispose(bool disposing)
