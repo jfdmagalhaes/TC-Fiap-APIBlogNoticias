@@ -30,9 +30,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
-    - name: Unit Test
+    - name: Unit Test Application
       run: dotnet test $(applicationUnitTests) --no-build --verbosity normal
+    
+    - name: Unit Test Infrastructure
+      run: dotnet test $(infrastructureUnitTests) --no-build --verbosity normal
       
     - name: Integration Test
-      run: |
+      run: dotnet test $(integrationTests) --no-build --verbosity normal
         # TODO adicionar aqui os comandos para testes unitários.
