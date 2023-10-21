@@ -7,6 +7,9 @@ Utiliza o sql como base de dados, em um container do docker adicionado juntament
 Foi feita a publicação da imagem utilizando o ACR ```(az acr build --image blognewsimage:v1 --registry acrtechchallengejfm --file resources/Dockerfile .)```, e disponibilizado o: ```docker pull acrtechchallengejfm.azurecr.io/blognewsimage:v1```. 
 Também foi criada a instância (ACI) para esta imagem. Devido o custo do portal azure, não é possível mantê-los disponíveis.
 
+Está utilizando o GitHub Actions para controle de pipeline com os testes unitários e de integração.
+Foi utilizada a biblioteca NUnit para os testes unitários e o XUnit para os integrados (apenas com o intuíto de estudo).
+
 ## Usage
 
 Para testar localmente, executar o docker-compose disponível no repositório. Cadastrar um usuário e utilizar o token de login para acessar os demais endpoints.
