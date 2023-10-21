@@ -67,3 +67,5 @@ Para usar a API, configure as seguintes variáveis no Postman:
 https://learn.microsoft.com/pt-br/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#create-your-first-pipeline
 
 https://learn.microsoft.com/pt-br/aspnet/core/security/authentication/identity?view=aspnetcore-7.0&tabs=visual-studio
+
+https://www.endpointdev.com/blog/2022/01/database-integration-testing-with-dotnet/
