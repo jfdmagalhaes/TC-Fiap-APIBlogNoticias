@@ -13,11 +13,11 @@ public class DatabaseSetup : IDisposable
     public static NoticiaDbContext CreateContext()
     {
         var config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
+            .AddJsonFile("appsettings.Development.json")
             .AddEnvironmentVariables()
             .Build();
 
-        var databaseSettings = config.GetConnectionString("DefaultConnection");
+        var databaseSettings = config.GetConnectionString("DefaultConnectionTest");
 
         var optionBuilder = new DbContextOptionsBuilder<NoticiaDbContext>();
         optionBuilder.UseSqlServer(
@@ -51,8 +51,19 @@ public class DatabaseSetup : IDisposable
         context.SaveChanges();
     }
 
+    private bool disposedValue = false;
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            disposedValue = true;
+        }
+    }
+
     public void Dispose()
     {
-        throw new NotImplementedException();
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }
