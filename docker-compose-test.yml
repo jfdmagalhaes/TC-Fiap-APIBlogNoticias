@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  sqlserver:
+  db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
       SA_PASSWORD: "Pass@word"
@@ -12,8 +12,14 @@ services:
   mssqltools:
     image: mcr.microsoft.com/mssql-tools
     depends_on:
-      - sqlserver
+      - db
     volumes:
       - ./resources/scripts/schemas.sql:/tmp/resources/scripts/schemas.sql
       - ./resources/scripts/init-schemas.sh:/tmp/resources/scripts/init-schemas.sh
     command: /bin/bash ./tmp/resources/scripts/init-schemas.sh
+  app:
+    image: jfdmagalhaes/blognews-fiap:latest
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings:DefaultConnection=Server=db,1430;Database=db_noticiastest;User=sa;Password=Pass@word;TrustServerCertificate=True;Pooling=false
