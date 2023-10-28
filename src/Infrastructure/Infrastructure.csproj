@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -20,4 +20,7 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="BlogNoticias.IntegrationTests" />
+	</ItemGroup>
 </Project>

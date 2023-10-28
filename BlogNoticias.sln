@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.UnitTests", "tests\Infrastructure.UnitTests\Infrastructure.UnitTests.csproj", "{5AE1EACB-71A0-4F8E-BEE1-B051A89A7C59}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.IntegrationTests", "tests\Infrastructure.IntegrationTests\Infrastructure.IntegrationTests.csproj", "{8F4E6A7D-530D-4152-AE9A-7882452BCCA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogNoticias.IntegrationTests", "tests\Infrastructure.IntegrationTests\BlogNoticias.IntegrationTests.csproj", "{8F4E6A7D-530D-4152-AE9A-7882452BCCA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
