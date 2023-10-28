@@ -37,4 +37,4 @@ jobs:
       run: dotnet test $(infrastructureUnitTests) --no-build --verbosity normal
       
     - name: Integration Test
-      run: docker-compose -f docker-compose-test.yml run app dotnet test $(integrationTests) --no-restore --verbosity normal
+      run: dotnet test $(integrationTests) --no-restore --verbosity normal
