@@ -2,13 +2,7 @@
 using BlogNoticias.IntegrationTests.Helpers;
 using Domain.Entities;
 using Domain.Repositories;
-using FluentAssertions;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using Moq;
-using System.Net;
-using WebApi;
 using Xunit;
 
 namespace BlogNoticias.IntegrationTests.Controllers;
