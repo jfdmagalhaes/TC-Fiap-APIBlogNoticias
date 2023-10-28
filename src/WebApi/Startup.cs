@@ -22,6 +22,7 @@ public class Startup
         services.ConfigureSwagger();
 
         services.AddRazorPages();
+        services.AddApplicationInsightsTelemetry();
 
     }
 
