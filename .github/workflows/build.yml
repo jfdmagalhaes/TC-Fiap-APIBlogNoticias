@@ -9,7 +9,7 @@ on:
 env:
   applicationUnitTests: '$(System.DefaultWorkingDirectory)/Application.UnitTests/Application.UnitTests.csproj'
   infrastructureUnitTests: '$(System.DefaultWorkingDirectory)/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj'
-  integrationTests: '$(System.DefaultWorkingDirectory)/Infrastructure.IntegrationTests/Infrastructure.IntegrationTests.csproj'
+  integrationTests: '$(System.DefaultWorkingDirectory)/BlogNoticias.IntegrationTests/BlogNoticias.IntegrationTests.csproj'
   
 jobs:
   build:
