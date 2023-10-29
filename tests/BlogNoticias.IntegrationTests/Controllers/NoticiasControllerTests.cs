@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using AutoFixture;
+using Domain.Entities;
 using Domain.Repositories;
 using Infrastructure.Repositories;
 using Microsoft.Data.SqlClient;
@@ -58,7 +59,10 @@ public class NoticiasControllerTests : IClassFixture<DockerFixture>
 
             var noticia = new NoticiaDto
             {
-               Descricao = "Descricao"
+               Descricao = "Descricao",
+               Autor = "Autor",
+               DataPublicacao = DateTime.Now,
+               Titulo = "Titulo"
             };
 
             // Act
