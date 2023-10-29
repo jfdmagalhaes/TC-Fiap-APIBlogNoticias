@@ -31,6 +31,7 @@ public class DockerFixture : IDisposable
 
         _containerId = createContainerResponse.ID;
         _dockerClient.Containers.StartContainerAsync(_containerId, new ContainerStartParameters()).GetAwaiter().GetResult();
+        Thread.Sleep(15000);
     }
 
     private void RemoveContainersOnTheSamePort()
