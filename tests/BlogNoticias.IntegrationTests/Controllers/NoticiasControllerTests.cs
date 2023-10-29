@@ -1,29 +1,17 @@
-﻿using AutoFixture;
-using BlogNoticias.IntegrationTests.Helpers;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Repositories;
-using Infrastructure.EntityFramework.Context;
 using Infrastructure.Repositories;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Moq;
-using Newtonsoft.Json;
-using System.Net.Http.Json;
-using System.Text;
+using TestProject1.Helpers;
 using Xunit;
 
-namespace BlogNoticias.IntegrationTests.Controllers;
-public class NoticiasControllerTests : IClassFixture<DockerFixture> 
+namespace TestProject1.Controllers;
+
+public class NoticiasControllerTests : IClassFixture<DockerFixture>
 {
-    private readonly HttpClient _httpClient;
     private readonly Mock<INoticiaRepository> _repository = new();
     private readonly DockerFixture _dockerFixture;
-
-    //public NoticiasControllerTests(ApiWebApplicationFactory application)
-    //{
-    //    _httpClient = application.CreateClient();
-    //}
 
     public NoticiasControllerTests(DockerFixture dockerFixture)
     {
@@ -31,27 +19,37 @@ public class NoticiasControllerTests : IClassFixture<DockerFixture>
 
         using (var connection = new SqlConnection(_dockerFixture.GetConnectionString()))
         {
+            connection.Open();
 
+            string checkDatabaseQuery = "IF NOT EXISTS (SELECT 1 FROM sys.databases WHERE name = 'db_noticiastest') CREATE DATABASE db_noticiastest";
+            using (var command = new SqlCommand(checkDatabaseQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
 
             string createTableQuery = @"
-             CREATE TABLE Noticias (
-                Id INT PRIMARY KEY IDENTITY,
-                Titulo NVARCHAR(255) NOT NULL,
-                Conteudo NVARCHAR(MAX) NOT NULL,
-                DataPublicacao DATETIME NOT NULL,
-                Autor NVARCHAR(255) NOT NULL
-                );";
+                IF OBJECT_ID('dbo.Noticias') IS NOT NULL  
+                    DROP TABLE [dbo].Noticias
+
+                CREATE TABLE Noticias (
+                    Id INT PRIMARY KEY IDENTITY,
+                    Titulo NVARCHAR(255) NOT NULL,
+                    Conteudo NVARCHAR(MAX) NOT NULL,
+                    DataPublicacao DATETIME NOT NULL,
+                    Autor NVARCHAR(255) NOT NULL
+            );";
 
             using (var command = new SqlCommand(createTableQuery, connection))
             {
                 command.ExecuteNonQuery();
             }
+
+            connection.Close();
         }
     }
 
-
     [Fact]
-    public async void Should_Insert_Fi_With_Success()
+    public async void Should_InsertNew_With_Success()
     {
         // Arrange
         using (var dbContext = _dockerFixture.CreateDbContext())
@@ -70,11 +68,8 @@ public class NoticiasControllerTests : IClassFixture<DockerFixture>
             // Assert
             var insertedNoticia = await dbContext.Noticias.FindAsync(noticia.Id);
             Assert.NotNull(insertedNoticia);
-            // Faça outras asserções de acordo com sua lógica de inserção e recuperação de dados
         }
-
     }
-
 
 
     //[Fact]
@@ -127,5 +122,4 @@ public class NoticiasControllerTests : IClassFixture<DockerFixture>
     //    // Assert
     //    response.EnsureSuccessStatusCode();
     //}
-
 }

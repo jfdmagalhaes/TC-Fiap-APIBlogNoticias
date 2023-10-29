@@ -13,7 +13,7 @@ using Moq;
 using System.Text;
 using WebApi;
 
-namespace BlogNoticias.IntegrationTests.Helpers;
+namespace TestProject1.Helpers;
 public class ApiWebApplicationFactory : WebApplicationFactory<Startup> 
 {
     public IConfiguration Configuration { get; private set; }
