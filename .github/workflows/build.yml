@@ -35,6 +35,11 @@ jobs:
     
     - name: Unit Test Infrastructure
       run: dotnet test $(infrastructureUnitTests) --no-build --verbosity normal
+
+    - name: Create container
+      run: |
+        docker pull mcr.microsoft.com/mssql/server:2019-latest
+        docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Pass@word" -e "MSSQL_PID=Developer" -p 1433:1433 --name sql-server-container -d mcr.microsoft.com/mssql/server:2019-latest
       
     - name: Integration Test
       run: dotnet test $(integrationTests) --no-restore --verbosity normal
