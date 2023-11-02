@@ -32,10 +32,9 @@ Além disso, foi criada a instâncias no ACI para implantar a imagem. No entanto
 O Github Actions está sendo utilizado para controle da pipeline. Onde, toda vez que ocorre uma alteração no código, são executados os passos de validação do código, build, etc, além da execução dos testes unitários e integrados.
 
 
-## Usage
+## Usage - Testes na aplicação
 
 Para testar localmente, executar o docker-compose disponível no repositório. Cadastrar um usuário e utilizar o token de login para acessar os demais endpoints.
-
 
 ```dotnet
 docker-compose up --build -d
@@ -46,6 +45,12 @@ Para usar a API, configure as seguintes variáveis no Postman:
 - Authorization Type: Bearer Token
 - Adicionar o token de autenticação obtido através do endpoint de login.
 
+Utilize a coleção do postman disponibilizada na pasta ```Resources``` do projeto. 
+ - No postman, selecione File > Import > selecionar o arquivo Json ```BlogNoticias.postman_collection.json```;
+ - Realize a criação de usuário no endpoint correspondente;
+ - Em seguida, realize o login do mesmo usuário para obter o token JWT;
+ - Adicione o token obtido, na aba "Authorization" dentro de cada um dos endpoints que for testar;
+ - A guia "Variables" possui a 'base_url' que pode ser alterada conforme necessário.
 
 ## Rotas
 (Todas utilizam JSON)
