@@ -33,7 +33,7 @@ Além disso, foi criada a instâncias no ACI para implantar a imagem. No entanto
 O Github Actions está sendo utilizado para controle da pipeline. Onde, toda vez que ocorre uma alteração no código, são executados os passos de validação do código, build, etc, além da execução dos testes unitários e integrados.
 
 ## Implementação do Application Insights
-Foi implementado o application insights da Azure, como o serviço de monitoramento da aplicação. Esta é uma ótima ferramenta, pois contibui com a observabilidade em tempo real do nosso serviço, fornecendo uma ótima visão de recursos utilizados, falhas na aplicação, utilização de alertas, etc.
+Foi implementado o application insights da Azure, como o serviço de monitoramento em tempo real da aplicação. Esta é uma ótima ferramenta, pois contibui com a observabilidade do nosso serviço, fornecendo uma ótima visão de recursos utilizados, falhas na aplicação, utilização de alertas, insights de usuários, além de integração na azure com outros recursos, e muito mais.
 
 ## Usage - Testes na aplicação
 
