@@ -5,6 +5,7 @@ using Domain.Entities;
 using Infrastructure.EntityFramework.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Json;
 using WebApi;
@@ -26,7 +27,28 @@ public class NoticiasControllerTest : IClassFixture<CustomWebApplicationFactory<
     }
 
     [Fact]
-    public async Task AddNoticia_Should_ExecuteSuccessfull()
+    public async Task PostNoticia_Should_ExecuteFailure()
+    {
+        //Arrange
+        var noticia = new NoticiaDto
+        {
+            Descricao = "Descricao",
+            Autor = "Autor",
+            DataPublicacao = DateTime.Now,
+            Titulo = "Titulo"
+        };
+
+        //Act
+        var response = await _httpClient.PostAsJsonAsync("/api/Noticias/AddNoticia", noticia);
+
+        //Asserts
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+
+    [Fact]
+    public async Task PostNoticia_Should_ExecuteSuccessfull()
     {
         //Arrange
         _httpClient = await _integrationTestTools.LoginUser();
@@ -44,5 +66,51 @@ public class NoticiasControllerTest : IClassFixture<CustomWebApplicationFactory<
         //Asserts
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task GelAllNoticias_Should_ExecuteSuccessfull()
+    {
+        //Arrange
+        _httpClient = await _integrationTestTools.LoginUser();
+        await _integrationTestTools.AddNoticia(_httpClient);
+
+        //Act
+        var response = await _httpClient.GetAsync("/api/Noticias/GetAll");
+        var content = await response.Content.ReadAsStringAsync();
+
+        //Asserts
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task DeleteNoticias_Should_ExecuteSuccessfull()
+    {
+        //Arrange
+        _httpClient = await _integrationTestTools.LoginUser();
+        await _integrationTestTools.AddNoticia(_httpClient);
+
+        var responseGetAll = await _httpClient.GetAsync("/api/Noticias/GetAll");
+        var content = responseGetAll.Content.ReadAsStringAsync().Result;
+        var getNoticia = JsonConvert.DeserializeObject<List<NoticiaDto>>(content);
+        var noticiaToDelete = getNoticia!.FirstOrDefault();
+
+        //Act
+        var response = await _httpClient.DeleteAsync($"/api/Noticias/DeleteById/{noticiaToDelete!.Id}");
+
+        //Asserts
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task GetById_Should_ExecuteFailure()
+    {
+        //Arrange
+        _httpClient = await _integrationTestTools.LoginUser();
+
+        //Act & Assert
+        Assert.ThrowsAsync<ArgumentNullException>(async () => await _httpClient.GetAsync($"/api/Noticias/1"));
     }
 }

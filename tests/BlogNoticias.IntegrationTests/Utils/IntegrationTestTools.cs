@@ -1,4 +1,5 @@
 ﻿using BlogNoticias.IntegrationTests.Factory;
+using Domain.Entities;
 using Infrastructure.EntityFramework.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,7 @@ public class IntegrationTestTools
         var user = new IdentityUser { UserName = "teste", Email = "email" };
         var password = "123Abc@";
 
-        await Createuser(_application, user, password);
+        await CreateUser(_application, user, password);
 
         var userModel = new CreateUserViewModel { UserName = user.UserName, Password = password };
         var httpResponse = await _httpClient.PostAsJsonAsync($"/api/Auth/login", userModel);
@@ -37,7 +38,7 @@ public class IntegrationTestTools
         return _httpClient;
     }
 
-    public async Task Createuser(CustomWebApplicationFactory<Startup> _application, IdentityUser user, string password)
+    public async Task CreateUser(CustomWebApplicationFactory<Startup> _application, IdentityUser user, string password)
     {
 
         using (var scope = _application.Services.CreateScope())
@@ -52,6 +53,19 @@ public class IntegrationTestTools
                 await applicationDbContext.SaveChangesAsync();
             }
         }
+    }
+
+    public async Task AddNoticia(HttpClient client)
+    {
+        var noticia = new NoticiaDto
+        {
+            Descricao = "Descricao",
+            Autor = "Autor",
+            DataPublicacao = DateTime.Now,
+            Titulo = "Titulo"
+        };
+
+        await _httpClient.PostAsJsonAsync($"/api/Noticias/AddNoticia", noticia);
     }
 }
 
