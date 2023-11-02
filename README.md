@@ -85,6 +85,11 @@ Utilize a coleção do postman disponibilizada na pasta ```Resources``` do proje
 - **Método HTTP:** POST
 - **Descrição:** Autentica usuário e fornece token.
 
+### 6. Remove uma noticia cadastrada atráves de um Id
+
+- **URL:** `http://localhost:8181/api/Noticias/DeleteById/{id}`
+- **Método HTTP:** DELETE
+- **Descrição:** Remove uma noticia específica, a partir de um ID.
 
 (Necessário realizar primeiro a criação do usuário e após isso o login. Com o login, utilizar o token retornado, para configurar a autenticação e acessar os endpoints de manipulação de notícias.)
 
