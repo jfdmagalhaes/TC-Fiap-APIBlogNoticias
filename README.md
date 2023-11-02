@@ -1,7 +1,7 @@
 # BlogNoticias
 
 BlogNoticias é um projeto de estudo para as fases 2 e 3 da Pós Graduação da FIAP (Arquitetura de Sistemas .NET com Azure). 
-Desenvolvido em C# com .NET 7, a aplicação utiliza o Identity como autenticação e possui alguns endpoints para o gerenciamento de noticias (PUT, GET, POST e DELETE - todos necessitando de autenticação).
+Desenvolvido em C# com .NET 7, seguindo um modelo de <strong>Clean Architecture</strong> (com as camadas de domínio, infra e aplicação bem separadas), a aplicação utiliza o Identity como autenticação e possui alguns endpoints para o gerenciamento de noticias (PUT, GET, POST e DELETE - todos necessitando de autenticação).
 Utiliza o sql como base de dados, em um container do docker adicionado juntamente aos scripts no projeto.
 
 ## Autenticação
@@ -32,6 +32,8 @@ Além disso, foi criada a instâncias no ACI para implantar a imagem. No entanto
 ## GitHub Actions
 O Github Actions está sendo utilizado para controle da pipeline. Onde, toda vez que ocorre uma alteração no código, são executados os passos de validação do código, build, etc, além da execução dos testes unitários e integrados.
 
+## Implementação do Application Insights
+Foi implementado o application insights da Azure, como o serviço de monitoramento da aplicação. Esta é uma ótima ferramenta, pois contibui com a observabilidade em tempo real do nosso serviço, fornecendo uma ótima visão de recursos utilizados, falhas na aplicação, utilização de alertas, etc.
 
 ## Usage - Testes na aplicação
 
