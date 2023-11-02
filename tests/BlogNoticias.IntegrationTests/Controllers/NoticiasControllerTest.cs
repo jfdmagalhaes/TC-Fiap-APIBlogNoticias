@@ -1,15 +1,10 @@
-﻿using AutoFixture;
-using BlogNoticias.IntegrationTests.Factory;
+﻿using BlogNoticias.IntegrationTests.Factory;
 using BlogNoticias.IntegrationTests.Utils;
 using Domain.Entities;
-using Infrastructure.EntityFramework.Context;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Json;
 using WebApi;
-using WebApi.Controllers;
 using Xunit;
 
 namespace BlogNoticias.IntegrationTests.Controllers;
