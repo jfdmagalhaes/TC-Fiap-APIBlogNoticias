@@ -20,9 +20,10 @@ Foram implementados os testes automatizados na aplicação.
 
 - **BlogNoticias.IntegrationTests**
   <p>Nos Testes Integrados, foi utilizada a biblioteca Xunit (diferente das demais camadas, apenas com intuíto de estudo). Também utilizado Moq, AutoFixture. 
-      Para simular o ambiente da aplicação, foi usada a biblioteca Docker.DotNet para criar contêineres Docker com bancos de dados fakes e outros serviços de infraestrutura. 
+      Para simular o ambiente da aplicação, foi usada a biblioteca <strong>Docker.DotNet</strong> para criar contêineres Docker com bancos de dados fakes e outros serviços de infraestrutura. 
       Isso garante que os testes sejam executados em um ambiente próximo ao de produção, permitindo a validação de casos de uso reais.
-
+      Já nos testes para a Aplicação (endpoints da API Rest), foi utilizado o banco de dados <strong>em memória</strong> para exploração de outras possilidades, com apoio de uma WebApplicationFactory customizada.
+      
 ## Azure Container Registry (ACR)
 Foi utilizado o Azure Container Registry (ACR) para hospedar as imagens Docker da aplicação. A publicação da imagem é feita com o comando ```(az acr build --image blognewsimage:v1 --registry acrtechchallengejfm --file resources/Dockerfile .)```, permitindo que essa imagem seja armazenada com segurança e disponibilizada para implantação. Você pode obter a imagem mais recente usando ```docker pull acrtechchallengejfm.azurecr.io/blognewsimage:v1```.
 
