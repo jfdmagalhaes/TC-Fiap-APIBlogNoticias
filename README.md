@@ -11,15 +11,15 @@ Está sendo utilizada a autenticação do tipo JWT (JSON Web Token). Sendo neces
 Foram implementados os testes automatizados na aplicação.
 
 - **Application.UnitTests**
-  Foram realizados os testes unitários de todos os endpoints da camada de aplicação. Tanto a parte de cadastro e login de usuário, quanto os endpoints de manipulação das noticias (put, post, get e delete).
+  <p>Foram realizados os testes unitários de todos os endpoints da camada de aplicação. Tanto a parte de cadastro e login de usuário, quanto os endpoints de manipulação das noticias (put, post, get e delete).
   Utilizada as bibliotecas NUnit, MoQ para criar os mocks necessários durante os testes e também o FluentAssertions para as asserções dos testes realizados de forma legível.
   
 - **Infrastructure.UnitTests**
-Aqui estão os testes da camanda de infra, onde validamos os repositórios que se conectam com o banco de dados e todas as manipulações que ocorrem.
-Tambem foram utilizadas as bibliotecas NUnit, Mock e FluentAssertions. Nesta camada, também foi utilizado o AutoFixture para facilitar a geração dos mocks.
+  <p>Aqui estão os testes da camanda de infra, onde validamos os repositórios que se conectam com o banco de dados e todas as manipulações que ocorrem.
+  Tambem foram utilizadas as bibliotecas NUnit, Mock e FluentAssertions. Nesta camada, também foi utilizado o AutoFixture para facilitar a geração dos mocks.
 
 -  **BlogNoticias.IntegrationTests**
-Nos Testes Integrados, foi utilizada a biblioteca Xunit (diferente das demais camadas, apenas com intuíto de estudo). Também utilizado Moq, AutoFixture. Para simular o ambiente da aplicação, foi usada a biblioteca Docker.DotNet para criar contêineres Docker com bancos de dados falsos e outros serviços de infraestrutura. Isso garante que os testes sejam executados em um ambiente próximo ao de produção, permitindo a validação de casos de uso reais.
+  <p>Nos Testes Integrados, foi utilizada a biblioteca Xunit (diferente das demais camadas, apenas com intuíto de estudo). Também utilizado Moq, AutoFixture. Para simular o ambiente da aplicação, foi usada a biblioteca Docker.DotNet para criar contêineres Docker com       bancos de dados falsos e outros serviços de infraestrutura. Isso garante que os testes sejam executados em um ambiente próximo ao de produção, permitindo a validação de casos de uso reais.
 
 ## Azure Container Registry (ACR)
 Foi utilizado o Azure Container Registry (ACR) para hospedar as imagens Docker da aplicação. A publicação da imagem é feita com o comando ```(az acr build --image blognewsimage:v1 --registry acrtechchallengejfm --file resources/Dockerfile .)```, permitindo que essa imagem seja armazenada com segurança e disponibilizada para implantação. Você pode obter a imagem mais recente usando ```docker pull acrtechchallengejfm.azurecr.io/blognewsimage:v1```.
@@ -89,3 +89,5 @@ https://learn.microsoft.com/pt-br/azure/devops/pipelines/ecosystems/dotnet-core?
 https://learn.microsoft.com/pt-br/aspnet/core/security/authentication/identity?view=aspnetcore-7.0&tabs=visual-studio
 
 https://www.endpointdev.com/blog/2022/01/database-integration-testing-with-dotnet/
+
+https://www.alura.com.br/conteudo/integracao-continua-testes-automatizados-pipeline-github-actions
