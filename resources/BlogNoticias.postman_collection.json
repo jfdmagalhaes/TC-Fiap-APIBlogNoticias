@@ -418,15 +418,24 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"jessicam\",\r\n  \"password\": \"123Abc@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{base_url}}/api/Auth/loginUser",
+					"raw": "{{base_url}}/api/Auth/login",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
 						"Auth",
-						"loginUser"
+						"login"
 					]
 				}
 			},
@@ -456,7 +465,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "https://1febddbb-0114-42a4-9ef9-0f3ee83ae7e4.mock.pstmn.io",
+			"value": "https://localhost:7221",
 			"type": "string"
 		}
 	]
