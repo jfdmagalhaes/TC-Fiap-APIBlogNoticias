@@ -51,13 +51,14 @@ public class Startup
             endpoints.MapRazorPages();
         });
 
-        //using (var scope = app.ApplicationServices.CreateScope())
-        //{
-        //    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>(); // Substitua YourDbContext pelo nome do seu DbContext.
+        using (var scope = app.ApplicationServices.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>(); // Substitua YourDbContext pelo nome do seu DbContext.
 
-        //    if (dbContext.Database.IsRelational())         
-            
-        //}
+            if (dbContext.Database.IsRelational())
                 ServiceExtension.MigrationInitialization(app);
+
+
+        }
     }
 }
