@@ -1,7 +1,7 @@
 # BlogNoticias
 
-BlogNoticias é um projeto de estudo para a fase 2 e 3 da pós graduação da FIAP (Arquitetura de Sistemas .NET com Azure). 
-Desenvolvido em C# com .NET 7, a aplicação utiliza o Identity como autenticação e possui alguns endpoints para o gerenciamento de noticias (put, get, post e delete - todos necessitando de autenticação).
+BlogNoticias é um projeto de estudo para as fases 2 e 3 da Pós Graduação da FIAP (Arquitetura de Sistemas .NET com Azure). 
+Desenvolvido em C# com .NET 7, a aplicação utiliza o Identity como autenticação e possui alguns endpoints para o gerenciamento de noticias (PUT, GET, POST e DELETE - todos necessitando de autenticação).
 Utiliza o sql como base de dados, em um container do docker adicionado juntamente aos scripts no projeto.
 
 ## Autenticação
