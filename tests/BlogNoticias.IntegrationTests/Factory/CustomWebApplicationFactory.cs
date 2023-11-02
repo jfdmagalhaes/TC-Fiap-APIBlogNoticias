@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -25,11 +26,24 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
             ReplaceServicesWithFakes(services);
 
             services.RemoveAll(typeof(DbContextOptions<ApplicationDbContext>));
+            services.RemoveAll(typeof(DbContextOptions<NoticiaDbContext>));
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseInMemoryDatabase("db_noticiastest", root);
+                options.UseInMemoryDatabase("db_noticiastest", root)
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+
+            });
+
+            services.AddDbContext<NoticiaDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("db_noticiastest", root)
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+
             });
         });
+
+        //Thread.Sleep(15000);
 
     }
 
