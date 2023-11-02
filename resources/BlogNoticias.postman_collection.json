@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "4421c481-5823-4502-8d9f-ddd2c669033e",
+		"name": "BlogNoticias",
+		"description": "## 🔖 Como utlizar?\n\nA aplicação precisa estar em execução localmente ou em container antes de realizar os testes.\n\n#### **1: Clicar em file > Import > Selecionar o json com as coleções.**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21397400"
+	},
+	"item": [
+		{
+			"name": "Get all news",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWWWZUN3AtME83cl9YOG1aczUtU1A0SVk3azI4aF9xS2JBM1hlNmpjYTBFIn0.eyJleHAiOjE2OTg4NTE3MjcsImlhdCI6MTY5ODg0NDUyNywianRpIjoiN2E4MjE5ZmUtODBmZS00NjQwLWJlN2YtNWM4NDM0MDgyZjZmIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5tZXJjYWRvZWxldHJvbmljby5jb20vYXV0aC9yZWFsbXMvbWUtdHJ1bmsiLCJhdWQiOiJyZWFsbS1tYW5hZ2VtZW50Iiwic3ViIjoiNDQ3NDZjYjEtZTdjNy00ZjJiLWFkNDgtMDM2NmFiNjMxNzZiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXBpLXNlcnZpY2VzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdC8qIiwiaHR0cHM6Ly90cnVuay5hcGkubWV3ZWIudXMuYXoubWlpc3kubWUvaWRlbnRpdHkvIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6OTAwMiIsImh0dHBzOi8vdHJ1bmsuYXBpLndlYi5tZXJjYWRvZS5jb20vaWRlbnRpdHkvIiwiaHR0cDovL2xvY2FsaG9zdDoyMDAxLyoiLCJodHRwczovL3RydW5rLm1lLmNvbS5iciJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxMjcuMC4wLjEiLCJjbGllbnRJZCI6ImFwaS1zZXJ2aWNlcyIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hcGktc2VydmljZXMiLCJjbGllbnRBZGRyZXNzIjoiMTI3LjAuMC4xIn0.PgyWyXP8N9tS3CQGcZ10P2ZuIEz8FopVGVcMtNKc2UMVUyzuyaK7iIUQRoYLNUi-4xg6XZMOSJaunQM6vmPIlM-JhmTW1fTxyn6ujt_m0YsRtz-aldMH8yaCqgFgDxxQu3rkVeqocaB0mwunlWJniXWZ4g3fsgW5Llkwn_FNd38T2b7Xfd68JnvFEcq7sN1gzFH6LpByXTMGQGDD99cB0a3tNCDrK6yzxKAsYcNq6FwOfWJo8oazZ5-deE8VTvLvIuPUPKpCjsRil0Ny-zECyhDE4TFwZFiHIGuCiVAm8sXcBF5vIJX7a4rz2tV6TgM5kQfP0rrd0wYyEFToUf1sxQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/Noticias/GetAll",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Noticias",
+						"GetAll"
+					]
+				},
+				"description": "Get all news articles."
+			},
+			"response": [
+				{
+					"name": "Get all news",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"news"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"articles\": [\n    {\n      \"id\": \"article-1\",\n      \"title\": \"Breaking News\",\n      \"description\": \"This is a breaking news article.\",\n      \"author\": \"John Doe\",\n      \"published_at\": \"2023-06-01T09:00:00\",\n      \"content\": \"This is the content of the breaking news article.\"\n    },\n    {\n      \"id\": \"article-2\",\n      \"title\": \"Feature Story\",\n      \"description\": \"This is a feature story article.\",\n      \"author\": \"Jane Smith\",\n      \"published_at\": \"2023-06-01T10:00:00\",\n      \"content\": \"This is the content of the feature story article.\"\n    }\n  ]\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Get news by ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWWWZUN3AtME83cl9YOG1aczUtU1A0SVk3azI4aF9xS2JBM1hlNmpjYTBFIn0.eyJleHAiOjE2OTg4NTE3MjcsImlhdCI6MTY5ODg0NDUyNywianRpIjoiN2E4MjE5ZmUtODBmZS00NjQwLWJlN2YtNWM4NDM0MDgyZjZmIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5tZXJjYWRvZWxldHJvbmljby5jb20vYXV0aC9yZWFsbXMvbWUtdHJ1bmsiLCJhdWQiOiJyZWFsbS1tYW5hZ2VtZW50Iiwic3ViIjoiNDQ3NDZjYjEtZTdjNy00ZjJiLWFkNDgtMDM2NmFiNjMxNzZiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXBpLXNlcnZpY2VzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdC8qIiwiaHR0cHM6Ly90cnVuay5hcGkubWV3ZWIudXMuYXoubWlpc3kubWUvaWRlbnRpdHkvIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6OTAwMiIsImh0dHBzOi8vdHJ1bmsuYXBpLndlYi5tZXJjYWRvZS5jb20vaWRlbnRpdHkvIiwiaHR0cDovL2xvY2FsaG9zdDoyMDAxLyoiLCJodHRwczovL3RydW5rLm1lLmNvbS5iciJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxMjcuMC4wLjEiLCJjbGllbnRJZCI6ImFwaS1zZXJ2aWNlcyIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hcGktc2VydmljZXMiLCJjbGllbnRBZGRyZXNzIjoiMTI3LjAuMC4xIn0.PgyWyXP8N9tS3CQGcZ10P2ZuIEz8FopVGVcMtNKc2UMVUyzuyaK7iIUQRoYLNUi-4xg6XZMOSJaunQM6vmPIlM-JhmTW1fTxyn6ujt_m0YsRtz-aldMH8yaCqgFgDxxQu3rkVeqocaB0mwunlWJniXWZ4g3fsgW5Llkwn_FNd38T2b7Xfd68JnvFEcq7sN1gzFH6LpByXTMGQGDD99cB0a3tNCDrK6yzxKAsYcNq6FwOfWJo8oazZ5-deE8VTvLvIuPUPKpCjsRil0Ny-zECyhDE4TFwZFiHIGuCiVAm8sXcBF5vIJX7a4rz2tV6TgM5kQfP0rrd0wYyEFToUf1sxQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/Noticias/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Noticias",
+						"1"
+					]
+				},
+				"description": "Get a specific news article by its ID."
+			},
+			"response": [
+				{
+					"name": "Get news by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news/:articleId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"news",
+								":articleId"
+							],
+							"variable": [
+								{
+									"key": "articleId",
+									"value": null,
+									"description": "The ID of the news article."
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": \"article-1\",\n  \"title\": \"Breaking News\",\n  \"description\": \"This is a breaking news article.\",\n  \"author\": \"John Doe\",\n  \"published_at\": \"2023-06-01T09:00:00\",\n  \"content\": \"This is the content of the breaking news article.\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Create news",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWWWZUN3AtME83cl9YOG1aczUtU1A0SVk3azI4aF9xS2JBM1hlNmpjYTBFIn0.eyJleHAiOjE2OTg4NTE3MjcsImlhdCI6MTY5ODg0NDUyNywianRpIjoiN2E4MjE5ZmUtODBmZS00NjQwLWJlN2YtNWM4NDM0MDgyZjZmIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5tZXJjYWRvZWxldHJvbmljby5jb20vYXV0aC9yZWFsbXMvbWUtdHJ1bmsiLCJhdWQiOiJyZWFsbS1tYW5hZ2VtZW50Iiwic3ViIjoiNDQ3NDZjYjEtZTdjNy00ZjJiLWFkNDgtMDM2NmFiNjMxNzZiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXBpLXNlcnZpY2VzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdC8qIiwiaHR0cHM6Ly90cnVuay5hcGkubWV3ZWIudXMuYXoubWlpc3kubWUvaWRlbnRpdHkvIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6OTAwMiIsImh0dHBzOi8vdHJ1bmsuYXBpLndlYi5tZXJjYWRvZS5jb20vaWRlbnRpdHkvIiwiaHR0cDovL2xvY2FsaG9zdDoyMDAxLyoiLCJodHRwczovL3RydW5rLm1lLmNvbS5iciJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxMjcuMC4wLjEiLCJjbGllbnRJZCI6ImFwaS1zZXJ2aWNlcyIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hcGktc2VydmljZXMiLCJjbGllbnRBZGRyZXNzIjoiMTI3LjAuMC4xIn0.PgyWyXP8N9tS3CQGcZ10P2ZuIEz8FopVGVcMtNKc2UMVUyzuyaK7iIUQRoYLNUi-4xg6XZMOSJaunQM6vmPIlM-JhmTW1fTxyn6ujt_m0YsRtz-aldMH8yaCqgFgDxxQu3rkVeqocaB0mwunlWJniXWZ4g3fsgW5Llkwn_FNd38T2b7Xfd68JnvFEcq7sN1gzFH6LpByXTMGQGDD99cB0a3tNCDrK6yzxKAsYcNq6FwOfWJo8oazZ5-deE8VTvLvIuPUPKpCjsRil0Ny-zECyhDE4TFwZFiHIGuCiVAm8sXcBF5vIJX7a4rz2tV6TgM5kQfP0rrd0wYyEFToUf1sxQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titulo\": \"string\",\n  \"descricao\": \"string\",\n  \"dataPublicacao\": \"2023-11-02T16:32:25.692Z\",\n  \"autor\": \"string\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/Noticias/AddNoticia",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Noticias",
+						"AddNoticia"
+					]
+				},
+				"description": "Create a news article."
+			},
+			"response": [
+				{
+					"name": "Create news",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"New Article\",\n  \"description\": \"This is a new article.\",\n  \"author\": \"John Doe\",\n  \"content\": \"This is the content of the new article.\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/news",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"news"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": \"article-3\",\n  \"title\": \"New Article\",\n  \"description\": \"This is a new article.\",\n  \"author\": \"John Doe\",\n  \"published_at\": \"2023-06-01T11:00:00\",\n  \"content\": \"This is the content of the new article.\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Update news",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWWWZUN3AtME83cl9YOG1aczUtU1A0SVk3azI4aF9xS2JBM1hlNmpjYTBFIn0.eyJleHAiOjE2OTg4NTE3MjcsImlhdCI6MTY5ODg0NDUyNywianRpIjoiN2E4MjE5ZmUtODBmZS00NjQwLWJlN2YtNWM4NDM0MDgyZjZmIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5tZXJjYWRvZWxldHJvbmljby5jb20vYXV0aC9yZWFsbXMvbWUtdHJ1bmsiLCJhdWQiOiJyZWFsbS1tYW5hZ2VtZW50Iiwic3ViIjoiNDQ3NDZjYjEtZTdjNy00ZjJiLWFkNDgtMDM2NmFiNjMxNzZiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXBpLXNlcnZpY2VzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdC8qIiwiaHR0cHM6Ly90cnVuay5hcGkubWV3ZWIudXMuYXoubWlpc3kubWUvaWRlbnRpdHkvIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6OTAwMiIsImh0dHBzOi8vdHJ1bmsuYXBpLndlYi5tZXJjYWRvZS5jb20vaWRlbnRpdHkvIiwiaHR0cDovL2xvY2FsaG9zdDoyMDAxLyoiLCJodHRwczovL3RydW5rLm1lLmNvbS5iciJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxMjcuMC4wLjEiLCJjbGllbnRJZCI6ImFwaS1zZXJ2aWNlcyIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hcGktc2VydmljZXMiLCJjbGllbnRBZGRyZXNzIjoiMTI3LjAuMC4xIn0.PgyWyXP8N9tS3CQGcZ10P2ZuIEz8FopVGVcMtNKc2UMVUyzuyaK7iIUQRoYLNUi-4xg6XZMOSJaunQM6vmPIlM-JhmTW1fTxyn6ujt_m0YsRtz-aldMH8yaCqgFgDxxQu3rkVeqocaB0mwunlWJniXWZ4g3fsgW5Llkwn_FNd38T2b7Xfd68JnvFEcq7sN1gzFH6LpByXTMGQGDD99cB0a3tNCDrK6yzxKAsYcNq6FwOfWJo8oazZ5-deE8VTvLvIuPUPKpCjsRil0Ny-zECyhDE4TFwZFiHIGuCiVAm8sXcBF5vIJX7a4rz2tV6TgM5kQfP0rrd0wYyEFToUf1sxQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Updated Article\",\n  \"description\": \"This is an updated article.\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/Noticias/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Noticias",
+						"1"
+					]
+				},
+				"description": "Update an existing news article."
+			},
+			"response": [
+				{
+					"name": "Update news",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated Article\",\n  \"description\": \"This is an updated article.\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/news/:articleId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"news",
+								":articleId"
+							],
+							"variable": [
+								{
+									"key": "articleId",
+									"value": null,
+									"description": "The ID of the news article."
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"id\": \"article-1\",\n  \"title\": \"Updated Article\",\n  \"description\": \"This is an updated article.\",\n  \"author\": \"John Doe\",\n  \"published_at\": \"2023-06-01T09:00:00\",\n  \"content\": \"This is the content of the updated article.\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "Delete news",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWWWZUN3AtME83cl9YOG1aczUtU1A0SVk3azI4aF9xS2JBM1hlNmpjYTBFIn0.eyJleHAiOjE2OTg4NTE3MjcsImlhdCI6MTY5ODg0NDUyNywianRpIjoiN2E4MjE5ZmUtODBmZS00NjQwLWJlN2YtNWM4NDM0MDgyZjZmIiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5tZXJjYWRvZWxldHJvbmljby5jb20vYXV0aC9yZWFsbXMvbWUtdHJ1bmsiLCJhdWQiOiJyZWFsbS1tYW5hZ2VtZW50Iiwic3ViIjoiNDQ3NDZjYjEtZTdjNy00ZjJiLWFkNDgtMDM2NmFiNjMxNzZiIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXBpLXNlcnZpY2VzIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL2xvY2FsaG9zdC8qIiwiaHR0cHM6Ly90cnVuay5hcGkubWV3ZWIudXMuYXoubWlpc3kubWUvaWRlbnRpdHkvIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6OTAwMiIsImh0dHBzOi8vdHJ1bmsuYXBpLndlYi5tZXJjYWRvZS5jb20vaWRlbnRpdHkvIiwiaHR0cDovL2xvY2FsaG9zdDoyMDAxLyoiLCJodHRwczovL3RydW5rLm1lLmNvbS5iciJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxMjcuMC4wLjEiLCJjbGllbnRJZCI6ImFwaS1zZXJ2aWNlcyIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hcGktc2VydmljZXMiLCJjbGllbnRBZGRyZXNzIjoiMTI3LjAuMC4xIn0.PgyWyXP8N9tS3CQGcZ10P2ZuIEz8FopVGVcMtNKc2UMVUyzuyaK7iIUQRoYLNUi-4xg6XZMOSJaunQM6vmPIlM-JhmTW1fTxyn6ujt_m0YsRtz-aldMH8yaCqgFgDxxQu3rkVeqocaB0mwunlWJniXWZ4g3fsgW5Llkwn_FNd38T2b7Xfd68JnvFEcq7sN1gzFH6LpByXTMGQGDD99cB0a3tNCDrK6yzxKAsYcNq6FwOfWJo8oazZ5-deE8VTvLvIuPUPKpCjsRil0Ny-zECyhDE4TFwZFiHIGuCiVAm8sXcBF5vIJX7a4rz2tV6TgM5kQfP0rrd0wYyEFToUf1sxQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/Noticias/DeleteById/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Noticias",
+						"DeleteById",
+						"1"
+					]
+				},
+				"description": "Delete a specific news article."
+			},
+			"response": [
+				{
+					"name": "Delete news",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/news/:articleId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"news",
+								":articleId"
+							],
+							"variable": [
+								{
+									"key": "articleId",
+									"value": null,
+									"description": "The ID of the news article."
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"article-1\",\n    \"title\": \"Breaking News\",\n    \"description\": \"This is a breaking news article.\",\n    \"author\": \"John Doe\",\n    \"published_at\": \"2023-06-01T09:00:00\",\n    \"content\": \"This is the content of the breaking news article.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"jessicam\",\r\n  \"password\": \"123Abc@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/Auth/createUser",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Auth",
+						"createUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/Auth/loginUser",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"Auth",
+						"loginUser"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://1febddbb-0114-42a4-9ef9-0f3ee83ae7e4.mock.pstmn.io",
+			"type": "string"
+		}
+	]
+}

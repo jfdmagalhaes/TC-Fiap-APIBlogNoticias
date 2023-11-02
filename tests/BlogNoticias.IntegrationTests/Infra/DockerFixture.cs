@@ -3,13 +3,13 @@ using Docker.DotNet.Models;
 using Infrastructure.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestProject1.Helpers;
+namespace BlogNoticias.IntegrationTests.Infra;
 public class DockerFixture : IDisposable
 {
     private DockerClient _dockerClient;
     private string _containerId;
 
-    public DockerFixture()
+    public void StartContainer()
     {
         _dockerClient = new DockerClientConfiguration().CreateClient();
 
@@ -23,7 +23,7 @@ public class DockerFixture : IDisposable
                 {
                     { "1433/tcp", new List<PortBinding> { new PortBinding { HostPort = "1433" } } }
                 },
-                PublishAllPorts = true // Optional: Set this to true if you want to publish all exposed ports
+                PublishAllPorts = true
             }
         }).GetAwaiter().GetResult();
 

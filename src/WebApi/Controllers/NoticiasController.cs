@@ -64,7 +64,7 @@ public class NoticiasController : ControllerBase
     }
 
     [Authorize]
-    [HttpPut("{id}")]
+    [HttpDelete("DeleteById/{id}")]
     public async Task<IActionResult> DeleteByIdAsync(int id)
     {
         try
