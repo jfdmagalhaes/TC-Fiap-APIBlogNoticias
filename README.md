@@ -20,9 +20,10 @@ Foram implementados os testes automatizados na aplicação.
 
 - **BlogNoticias.IntegrationTests**
   <p>Nos Testes Integrados, foi utilizada a biblioteca Xunit (diferente das demais camadas, apenas com intuíto de estudo). Também utilizado Moq, AutoFixture. 
-      Para simular o ambiente da aplicação, foi usada a biblioteca Docker.DotNet para criar contêineres Docker com bancos de dados fakes e outros serviços de infraestrutura. 
+      Para simular o ambiente da aplicação, foi usada a biblioteca <strong>Docker.DotNet</strong> para criar contêineres Docker com bancos de dados fakes e outros serviços de infraestrutura. 
       Isso garante que os testes sejam executados em um ambiente próximo ao de produção, permitindo a validação de casos de uso reais.
-
+      Já nos testes para a Aplicação (endpoints da API Rest), foi utilizado o banco de dados <strong>em memória</strong> para exploração de outras possilidades, com apoio de uma WebApplicationFactory customizada.
+      
 ## Azure Container Registry (ACR)
 Foi utilizado o Azure Container Registry (ACR) para hospedar as imagens Docker da aplicação. A publicação da imagem é feita com o comando ```(az acr build --image blognewsimage:v1 --registry acrtechchallengejfm --file resources/Dockerfile .)```, permitindo que essa imagem seja armazenada com segurança e disponibilizada para implantação. Você pode obter a imagem mais recente usando ```docker pull acrtechchallengejfm.azurecr.io/blognewsimage:v1```.
 
@@ -32,10 +33,9 @@ Além disso, foi criada a instâncias no ACI para implantar a imagem. No entanto
 O Github Actions está sendo utilizado para controle da pipeline. Onde, toda vez que ocorre uma alteração no código, são executados os passos de validação do código, build, etc, além da execução dos testes unitários e integrados.
 
 
-## Usage
+## Usage - Testes na aplicação
 
 Para testar localmente, executar o docker-compose disponível no repositório. Cadastrar um usuário e utilizar o token de login para acessar os demais endpoints.
-
 
 ```dotnet
 docker-compose up --build -d
@@ -46,6 +46,12 @@ Para usar a API, configure as seguintes variáveis no Postman:
 - Authorization Type: Bearer Token
 - Adicionar o token de autenticação obtido através do endpoint de login.
 
+Utilize a coleção do postman disponibilizada na pasta ```Resources``` do projeto. 
+ - No postman, selecione File > Import > selecionar o arquivo Json ```BlogNoticias.postman_collection.json```;
+ - Realize a criação de usuário no endpoint correspondente;
+ - Em seguida, realize o login do mesmo usuário para obter o token JWT;
+ - Adicione o token obtido, na aba "Authorization" dentro de cada um dos endpoints que for testar;
+ - A guia "Variables" possui a 'base_url' que pode ser alterada conforme necessário.
 
 ## Rotas
 (Todas utilizam JSON)
@@ -80,6 +86,11 @@ Para usar a API, configure as seguintes variáveis no Postman:
 - **Método HTTP:** POST
 - **Descrição:** Autentica usuário e fornece token.
 
+### 6. Remove uma noticia cadastrada atráves de um Id
+
+- **URL:** `http://localhost:8181/api/Noticias/DeleteById/{id}`
+- **Método HTTP:** DELETE
+- **Descrição:** Remove uma noticia específica, a partir de um ID.
 
 (Necessário realizar primeiro a criação do usuário e após isso o login. Com o login, utilizar o token retornado, para configurar a autenticação e acessar os endpoints de manipulação de notícias.)
 
