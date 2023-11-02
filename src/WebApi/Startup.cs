@@ -1,4 +1,6 @@
 ﻿using Infraestructure;
+using Infrastructure.EntityFramework.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi;
 
@@ -49,6 +51,14 @@ public class Startup
             endpoints.MapRazorPages();
         });
 
-        ServiceExtension.MigrationInitialization(app);
+        using (var scope = app.ApplicationServices.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>(); // Substitua YourDbContext pelo nome do seu DbContext.
+
+            if (dbContext.Database.IsRelational())
+                ServiceExtension.MigrationInitialization(app);
+
+
+        }
     }
 }
