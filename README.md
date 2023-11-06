@@ -19,7 +19,7 @@ Foram implementados os testes automatizados na aplicação.
   Tambem foram utilizadas as bibliotecas NUnit, Mock e FluentAssertions. Nesta camada, também foi utilizado o AutoFixture para facilitar a geração dos mocks.
 
 - **BlogNoticias.IntegrationTests**
-  <p>Nos Testes Integrados, foi utilizada a biblioteca Xunit (diferente das demais camadas, apenas com intuíto de estudo). Também utilizado Moq, AutoFixture. 
+  <p>Nos Testes de Integração, foi utilizada a biblioteca Xunit (diferente das demais camadas, apenas com intuíto de estudo). Também utilizado Moq, AutoFixture. 
       Para simular o ambiente da aplicação, foi usada a biblioteca <strong>Docker.DotNet</strong> para criar contêineres Docker com bancos de dados fakes e outros serviços de infraestrutura. 
       Isso garante que os testes sejam executados em um ambiente próximo ao de produção, permitindo a validação de casos de uso reais.
       Já nos testes para a Aplicação (endpoints da API Rest), foi utilizado o banco de dados <strong>em memória</strong> para exploração de outras possilidades, com apoio de uma WebApplicationFactory customizada.
