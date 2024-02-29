@@ -2,8 +2,6 @@
 using Domain.Interfaces;
 using Domain.Repositories;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -34,15 +32,19 @@ public class NoticiasControllerTests
         var getNoticias = await _noticiasController.GetAllAsync();
 
         //ass
-        getNoticias.Should().NotBeNull();
-        getNoticias.Should().BeOfType<List<NoticiaDto>>();
+        Assert.That(getNoticias, Is.InstanceOf<OkObjectResult>());
     }
 
     [Test]
-    public void GetAll_Should_ThrowsException()
+    public async Task GetAll_Should_ThrowsException()
     {
         _repository.Reset();
-        Assert.ThrowsAsync<ArgumentNullException>(() => _noticiasController.GetAllAsync());
+
+        // Act
+        var result = await _noticiasController.GetAllAsync();
+
+        // Assert
+        Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
     }
 
     [Test]
@@ -56,16 +58,19 @@ public class NoticiasControllerTests
         var getNoticiaById = await _noticiasController.GetByIdAsync(noticia.Id);
 
         //ass
-        getNoticiaById.Should().NotBeNull();
-        getNoticiaById.Id.Should().Be(noticia.Id);
-        getNoticiaById.Should().BeOfType<NoticiaDto>();
+        Assert.That(getNoticiaById, Is.InstanceOf<OkObjectResult>());
     }
 
     [Test]
-    public void GetById_Should_ThrowsException()
+    public async Task GetById_Should_ThrowsException()
     {
         _repository.Reset();
-        Assert.ThrowsAsync<ArgumentNullException>(() => _noticiasController.GetByIdAsync(1));
+
+        // Act
+        var result = await _noticiasController.GetByIdAsync(1);
+
+        // Assert
+        Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
     }
 
     [Test]

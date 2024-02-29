@@ -22,7 +22,7 @@ public class NoticiasController : ControllerBase
     [HttpGet("GetAll")]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<IEnumerable<NoticiaDto>>> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync()
     {
         var noticias = await _repository.GetAllNoticias();
         if (noticias.Any() is false) return NotFound("Não foi encontrada nenhuma noticia");
@@ -34,7 +34,7 @@ public class NoticiasController : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<NoticiaDto>> GetByIdAsync(int id)
+    public async Task<IActionResult> GetByIdAsync(int id)
     {
         var noticia = await _repository.GetNoticiaById(id);
         if (noticia == null) return NotFound($"Não foi encontrada noticia com o Id: {id}");
