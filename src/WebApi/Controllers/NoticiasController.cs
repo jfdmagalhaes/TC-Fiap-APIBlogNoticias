@@ -32,16 +32,19 @@ public class NoticiasController : ControllerBase
 
     [Authorize]
     [HttpGet("{id}")]
-    public async Task<NoticiaDto> GetByIdAsync(int id)
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<NoticiaDto>> GetByIdAsync(int id)
     {
         var noticia = await _repository.GetNoticiaById(id);
-        if (noticia == null) throw new ArgumentNullException($"Não foi encontrada noticia com o Id: {id}");
+        if (noticia == null) return NotFound($"Não foi encontrada noticia com o Id: {id}");
 
-        return noticia;
+        return Ok(noticia);
     }
 
     [Authorize]
     [HttpPost("AddNoticia")]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> AddNoticiaAsync(Noticia noticia)
     {
         try
@@ -67,6 +70,7 @@ public class NoticiasController : ControllerBase
 
     [Authorize]
     [HttpDelete("DeleteById/{id}")]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> DeleteByIdAsync(int id)
     {
         try
