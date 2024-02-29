@@ -20,12 +20,14 @@ public class NoticiasController : ControllerBase
 
     [Authorize]
     [HttpGet("GetAll")]
-    public async Task<IEnumerable<NoticiaDto>> GetAllAsync()
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<NoticiaDto>>> GetAllAsync()
     {
         var noticias = await _repository.GetAllNoticias();
-        if (noticias.Any() is false) throw new ArgumentNullException("Não foi encontrada nenhuma noticia");
+        if (noticias.Any() is false) return NotFound("Não foi encontrada nenhuma noticia");
 
-        return noticias;
+        return Ok(noticias);
     }
 
     [Authorize]
