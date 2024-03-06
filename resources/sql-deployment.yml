@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: sql-server
+  strategy:
+    type : Recreate
+  template:
+    metadata:
+      labels:
+        app: sql-server
+    spec:
+      containers:
+      - name: sql-server
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        imagePullPolicy: Never
+        env:
+          - name: SA_PASSWORD
+            value: "Pass@word"
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_PID
+            value: "Developer"
+        ports:
+        - containerPort: 1433
+        volumeMounts:
+          - name: init-script  # Monta o volume com o script de inicialização
+            mountPath: /docker-entrypoint-initdb.d 
+      volumes:
+      - name: init-script
+        configMap:
+          name: init-script-configmap
