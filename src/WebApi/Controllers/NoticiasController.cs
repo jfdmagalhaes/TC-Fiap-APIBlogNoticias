@@ -18,7 +18,16 @@ public class NoticiasController : ControllerBase
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
-    [Authorize]
+
+    [HttpGet("Test")]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetTeste()
+    {
+        return Ok("olá");
+    }
+
+
     [HttpGet("GetAll")]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -42,7 +51,6 @@ public class NoticiasController : ControllerBase
         return Ok(noticia);
     }
 
-    [Authorize]
     [HttpPost("AddNoticia")]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> AddNoticiaAsync(Noticia noticia)
@@ -68,7 +76,6 @@ public class NoticiasController : ControllerBase
         }
     }
 
-    [Authorize]
     [HttpDelete("DeleteById/{id}")]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> DeleteByIdAsync(int id)

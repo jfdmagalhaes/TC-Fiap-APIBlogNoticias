@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blognews-api
+  labels:
+    app: blognews-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blognews-api
+  template:
+    metadata:
+      labels:
+        app: blognews-api
+    spec:
+      containers:
+      - name: blognews-api
+        image: jfdmagalhaes/blognews-fiap:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          hostPort: 8080  # Expondo a porta 8080 do contêiner diretamente no nível do pod
+        env:
+        - name: DATABASE_CONNECTION_STRING
+          valueFrom:
+            configMapKeyRef:
+              name: api-config-map
+              key: database-connection-string
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config-map
+data:
+  database-connection-string: |
+    Server=localhost;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True;

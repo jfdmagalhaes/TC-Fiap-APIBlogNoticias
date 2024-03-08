@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blognews-service
+  name: blognews-api
   labels:
-    run: blognews-service
+    app: blognews-api
 spec:
-  selector:
-    app: pod-blognews
+  type: ClusterIP
   ports:
-  - port: 8080
-    targetPort: 80
+  - port: 8999
     protocol: TCP
-  type: LoadBalancer
+    targetPort: 8999
+  selector:
+    app: blognews-api
