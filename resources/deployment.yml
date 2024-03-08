@@ -22,13 +22,14 @@ spec:
         - containerPort: 8080
           hostPort: 8080  # Expondo a porta 8080 do contêiner diretamente no nível do pod
         env:
-        - name: DATABASE_CONNECTION_STRING
+        - name: ConnectionStrings__DefaultConnection
           valueFrom:
             configMapKeyRef:
               name: api-config-map
               key: database-connection-string
-
+  
 ---
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
