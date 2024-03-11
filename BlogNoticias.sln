@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D2438557-BB8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{60BFB269-7005-4A79-8A2A-96BEBC4E2315}"
 	ProjectSection(SolutionItems) = preProject
-		deployment.yml = deployment.yml
+		resources\deployment.yml = resources\deployment.yml
 		resources\docker-compose.yml = resources\docker-compose.yml
 		resources\Dockerfile = resources\Dockerfile
 		service.yml = service.yml
