@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blognews-api
+  labels:
+    app: blognews-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blognews-api
+  template:
+    metadata:
+      labels:
+        app: blognews-api
+    spec:
+      containers:
+      - name: blognews-api
+        image: jfdmagalhaes/blognews-fiap:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+            hostPort: 8080
+        # volumeMounts:
+        #   - mountPath: "/docker-entrypoint-initdb.d"
+        #     name: blognews-code-storage
+        env:
+        - name: CONNECTION_STRING
+          value: Server=sql-service;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True  
+      # volumes:
+      #   - name: blognews-code-storage
+      #     persistentVolumeClaim:
+      #       claimName: blognews-volume-claim

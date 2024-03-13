@@ -8,10 +8,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{60BFB269-7005-4A79-8A2A-96BEBC4E2315}"
 	ProjectSection(SolutionItems) = preProject
 		resources\configmap.yml = resources\configmap.yml
+		resources\deployment-sql.yml = resources\deployment-sql.yml
+		resources\deployment.yml = resources\deployment.yml
 		resources\docker-compose.yml = resources\docker-compose.yml
 		resources\Dockerfile = resources\Dockerfile
-		resources\pod.yml = resources\pod.yml
-		service.yml = service.yml
+		resources\service-sql.yml = resources\service-sql.yml
+		resources\service.yml = resources\service.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "src\WebApi\WebApi.csproj", "{FBEE2B98-1417-41D7-B549-BDA62EB39846}"
@@ -33,6 +35,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.UnitTests", "tests\Infrastructure.UnitTests\Infrastructure.UnitTests.csproj", "{5AE1EACB-71A0-4F8E-BEE1-B051A89A7C59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogNoticias.IntegrationTests", "tests\BlogNoticias.IntegrationTests\BlogNoticias.IntegrationTests.csproj", "{F98C102C-04BD-44D5-A39D-4D2F3AEBA3EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ignoreResources", "ignoreResources", "{8D2077A1-BA72-4662-8866-F99F76112FA0}"
+	ProjectSection(SolutionItems) = preProject
+		resources\ignoreResources\pod.yml = resources\ignoreResources\pod.yml
+		resources\ignoreResources\pvc.yml = resources\ignoreResources\pvc.yml
+		resources\ignoreResources\service-sql.yml = resources\ignoreResources\service-sql.yml
+		resources\ignoreResources\service.yml = resources\ignoreResources\service.yml
+		resources\ignoreResources\sql-deployment.yml = resources\ignoreResources\sql-deployment.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +87,7 @@ Global
 		{D22A352D-FC02-46A6-83ED-A2564AC50E91} = {66C5B0B3-A7D2-44F2-8885-240B3A13CBB0}
 		{5AE1EACB-71A0-4F8E-BEE1-B051A89A7C59} = {66C5B0B3-A7D2-44F2-8885-240B3A13CBB0}
 		{F98C102C-04BD-44D5-A39D-4D2F3AEBA3EF} = {66C5B0B3-A7D2-44F2-8885-240B3A13CBB0}
+		{8D2077A1-BA72-4662-8866-F99F76112FA0} = {60BFB269-7005-4A79-8A2A-96BEBC4E2315}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50E17868-3A52-4421-8957-58BF17215D6D}

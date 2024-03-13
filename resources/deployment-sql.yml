@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-server-deployment
+spec:
+  selector:
+    matchLabels:
+      app: sql-server
+  strategy:
+    type : Recreate
+  template:
+    metadata:
+      labels:
+        app: sql-server
+    spec:
+      hostname:
+        localhost
+      containers:
+      - name: sql-server
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: MSSQL_SA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                 name: sql-password
+                 key: password
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_PID
+            value: "Developer"
+        ports:
+        - containerPort: 1433
+        volumeMounts:
+          - name: init-script  # Monta o volume com o script de inicialização
+            mountPath: /docker-entrypoint-initdb.d 
+          - name: mssqldb 
+            mountPath: /var/opt/mssql 
+
+      volumes:
+      - name: init-script
+        configMap:
+          name: init-script-configmap
+      - name: mssqldb 
+        persistentVolumeClaim: 
+           claimName: mssql-data 
+
+---
+
+kind: PersistentVolumeClaim 
+apiVersion: v1 
+metadata: 
+  name: mssql-data 
+spec: 
+  accessModes: 
+  - ReadWriteOnce 
+  resources: 
+    requests: 
+      storage: 8Gi 
+
+# Comando executado para isolar a senha do sql em uma secret
+# kubectl create secret generic sql-password --from-literal=password=Sua_Password

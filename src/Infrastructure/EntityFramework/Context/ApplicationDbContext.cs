@@ -25,7 +25,7 @@ public class ApplicationDbContext : IdentityDbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer(
-            "Server=sqlserver;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True;");
+            "Server=localhost;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True;");
         }
     }
 }

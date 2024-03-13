@@ -1,17 +1,4 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sql-pv-claim
-  labels:
-    app: sql
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi #1 GB
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: init-script-configmap
@@ -34,3 +21,38 @@ data:
     );
 
     GO
+
+# ---
+
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: blognews-volume
+#   labels:
+#     type: local
+# spec:
+#   claimRef:
+#     namespace: default
+#     name: blognews-volume-claim
+#   storageClassName: manual
+#   capacity:
+#     storage: 5Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: "/docker-entrypoint-initdb.d"
+
+# ---
+
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: blognews-volume-claim
+# spec:
+#   volumeName: blognews-volume
+#   storageClassName: manual
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 5Gi

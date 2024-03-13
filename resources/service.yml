@@ -6,9 +6,8 @@ metadata:
     run: blognews-service
 spec:
   selector:
-    app: pod-blognews
+    app: blognews-api
   ports:
-  - port: 8080
-    targetPort: 80
-    protocol: TCP
-  type: LoadBalancer
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP

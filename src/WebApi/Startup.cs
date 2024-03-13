@@ -1,5 +1,6 @@
 ﻿using Infraestructure;
 using Infrastructure.EntityFramework.Context;
+using Microsoft.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApi;
@@ -12,6 +13,14 @@ public class Startup
     }
 
     public IConfiguration Configuration { get; }
+
+    public void ConfigureAppConfiguration(IConfigurationBuilder builder)
+    {
+        builder.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+            .AddEnvironmentVariables();
+    }
 
     public void ConfigureServices(IServiceCollection services)
     {
@@ -57,8 +66,6 @@ public class Startup
 
             if (dbContext.Database.IsRelational())
                 ServiceExtension.MigrationInitialization(app);
-
-
         }
     }
 }
