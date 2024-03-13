@@ -19,21 +19,15 @@ spec:
         image: jfdmagalhaes/blognews-fiap:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
-          hostPort: 8080  # Expondo a porta 8080 do contêiner diretamente no nível do pod
+          - containerPort: 8080
+            hostPort: 8080
+        # volumeMounts:
+        #   - mountPath: "/docker-entrypoint-initdb.d"
+        #     name: blognews-code-storage
         env:
-        - name: ConnectionStrings__DefaultConnection
-          valueFrom:
-            configMapKeyRef:
-              name: api-config-map
-              key: database-connection-string
-  
----
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: api-config-map
-data:
-  database-connection-string: |
-    Server=localhost;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True;
+        - name: CONNECTION_STRING
+          value: Server=sql-service;Database=db_noticias;User=sa;Password=Pass@word;TrustServerCertificate=True  
+      # volumes:
+      #   - name: blognews-code-storage
+      #     persistentVolumeClaim:
+      #       claimName: blognews-volume-claim

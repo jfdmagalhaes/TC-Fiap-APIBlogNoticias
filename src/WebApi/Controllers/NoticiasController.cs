@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class NoticiasController : ControllerBase
@@ -18,16 +19,6 @@ public class NoticiasController : ControllerBase
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
     }
 
-
-    [HttpGet("Test")]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetTeste()
-    {
-        return Ok("olá");
-    }
-
-
     [HttpGet("GetAll")]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -39,7 +30,6 @@ public class NoticiasController : ControllerBase
         return Ok(noticias);
     }
 
-    [Authorize]
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

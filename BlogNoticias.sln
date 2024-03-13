@@ -7,10 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D2438557-BB8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{60BFB269-7005-4A79-8A2A-96BEBC4E2315}"
 	ProjectSection(SolutionItems) = preProject
+		resources\configmap.yml = resources\configmap.yml
+		resources\deployment-sql.yml = resources\deployment-sql.yml
 		resources\deployment.yml = resources\deployment.yml
 		resources\docker-compose.yml = resources\docker-compose.yml
 		resources\Dockerfile = resources\Dockerfile
-		service.yml = service.yml
+		resources\service-sql.yml = resources\service-sql.yml
+		resources\service.yml = resources\service.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "src\WebApi\WebApi.csproj", "{FBEE2B98-1417-41D7-B549-BDA62EB39846}"
@@ -35,7 +38,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogNoticias.IntegrationTes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ignoreResources", "ignoreResources", "{8D2077A1-BA72-4662-8866-F99F76112FA0}"
 	ProjectSection(SolutionItems) = preProject
-		resources\ignoreResources\configmap.yml = resources\ignoreResources\configmap.yml
 		resources\ignoreResources\pod.yml = resources\ignoreResources\pod.yml
 		resources\ignoreResources\pvc.yml = resources\ignoreResources\pvc.yml
 		resources\ignoreResources\service-sql.yml = resources\ignoreResources\service-sql.yml

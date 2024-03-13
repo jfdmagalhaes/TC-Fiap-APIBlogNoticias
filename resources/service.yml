@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blognews-api
+  name: blognews-service
   labels:
-    app: blognews-api
+    run: blognews-service
 spec:
-  type: ClusterIP
-  ports:
-  - port: 8999
-    protocol: TCP
-    targetPort: 8999
   selector:
     app: blognews-api
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP
