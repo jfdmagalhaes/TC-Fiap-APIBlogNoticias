@@ -97,7 +97,7 @@ Utilize a coleção do postman disponibilizada na pasta ```Resources``` do proje
 (Necessário realizar primeiro a criação do usuário e após isso o login. Com o login, utilizar o token retornado, para configurar a autenticação e acessar os endpoints de manipulação de notícias.)
 
 ## Kubernetes
-Para estudo do kubernetes, fpo feita a configuração da API junto com um banco de dados SQL Server em um cluster local do Kubernetes. Isso permite que a aplicação seja escalável e gerenciável em um ambiente de contêineres.
+Para estudo, foi feita a configuração da API junto com um banco de dados SQL Server em um cluster local do Kubernetes. Isso permite que a aplicação seja escalável e gerenciável em um ambiente de contêineres.
 
 **Componentes:**
 - **API Deployment YAML**: Este arquivo descreve como implantar sua API no cluster Kubernetes. Ele especifica o contêiner da sua aplicação, suas configurações e recursos necessários.
