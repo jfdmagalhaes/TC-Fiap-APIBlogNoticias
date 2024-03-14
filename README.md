@@ -96,7 +96,33 @@ Utilize a coleção do postman disponibilizada na pasta ```Resources``` do proje
 
 (Necessário realizar primeiro a criação do usuário e após isso o login. Com o login, utilizar o token retornado, para configurar a autenticação e acessar os endpoints de manipulação de notícias.)
 
+## Kubernetes
+Para estudo do kubernetes, fpo feita a configuração da API junto com um banco de dados SQL Server em um cluster local do Kubernetes. Isso permite que a aplicação seja escalável e gerenciável em um ambiente de contêineres.
 
+**Componentes:**
+- **API Deployment YAML**: Este arquivo descreve como implantar sua API no cluster Kubernetes. Ele especifica o contêiner da sua aplicação, suas configurações e recursos necessários.
+
+- **SQL Server Deployment YAML:** Similar ao anterior, este arquivo descreve como implantar o SQL Server no cluster Kubernetes. Ele inclui informações sobre o contêiner do SQL Server e suas configurações.
+
+- **API Service YAML:** Este arquivo descreve como expor sua API dentro do cluster Kubernetes, permitindo que outros serviços acessem.
+
+- **SQL Server Service YAML:** Semelhante ao serviço da API, este arquivo descreve como expor o SQL Server dentro do cluster para que outros serviços possam se conectar a ele.
+
+- **ConfigMap:** Um ConfigMap contendo o script inicial da base de dados. Ele é usado para configurar o banco de dados SQL Server com dados iniciais ou configurações necessárias durante a inicialização.
+
+Foi utilizado o **Minikube** como ferramenta local.
+Comandos utilizados:
+
+```dotnet
+
+minikube start
+kubectl apply -f deployment.yml (api)
+kubectl apply -f deployment-sql.yml (sql)
+kubectl apply -f service.yml (service api)
+kubectl apply -f service-sql.yml (service sql)
+kubectl apply -f configmap.yml (script inicial)
+kubectl port-forward NOME_POD 2501:8080
+```
 ## References
 
 https://learn.microsoft.com/pt-br/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops&tabs=dotnetfive#create-your-first-pipeline
