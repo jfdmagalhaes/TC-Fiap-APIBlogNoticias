@@ -132,4 +132,5 @@ https://learn.microsoft.com/pt-br/aspnet/core/security/authentication/identity?v
 https://www.endpointdev.com/blog/2022/01/database-integration-testing-with-dotnet/
 
 https://www.alura.com.br/conteudo/integracao-continua-testes-automatizados-pipeline-github-actions
- docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Pass@word' -p 1433:1433 -d --name=sql mcr.microsoft.com/mssql/server:2019-latest
+
+https://kubernetes.io/docs/home/
